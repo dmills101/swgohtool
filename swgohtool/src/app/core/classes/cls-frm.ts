@@ -4,6 +4,9 @@ export class Farm {
     side: string
     units: FarmUnit[]
     ships: FarmUnit[]
+    image:any = null;
+    ok:boolean = false;
+    ultimate:boolean = false;
 
     constructor(name: string, type: string, side: string, units: FarmUnit[], ships: FarmUnit[]) {
         this.name = name
@@ -22,6 +25,16 @@ export class FarmUnit {
 
 player_itm:any;
 
+  rarityOK:boolean=false;
+  gearOK:boolean=false;
+  relicOK:boolean = false;
+
+  stars_on: number=0;
+  gear_level_on: number=0;
+  relic_level_on: number=0;
+
+  image:any = null;
+
     constructor(name: string, stars: number, gear_level?: number, relic_level?: number) {
         this.name = name
         this.stars = stars
@@ -29,8 +42,45 @@ player_itm:any;
         this.relic_level = relic_level
     }
 
-    setPlayerItem(item:any){
+allOK(){
+  return this.gearOK && this.relicOK && this.rarityOK;
+}
+
+    setPlayerItem(item:any, item_orig:any){
+      if(item_orig && item_orig.hasOwnProperty('image') && item_orig.image){
+        this.image = item_orig.image;
+      }
         this.player_itm = item;
+        if(item && item.hasOwnProperty('data') && item.data){
+        this.stars_on = item.data.rarity;
+        this.gear_level_on = item.data.gear_level;
+        this.relic_level_on = item.data.relic_tier -2;
+
+        if(this.name == "Veteran Smuggler Han Solo"){
+          console.log('fafa');
+        }
+        
+        this.rarityOK = (this.stars_on >= this.stars);
+        if(this.gear_level){
+        this.gearOK = (this.gear_level_on >= this.gear_level);
+        }else{
+          this.gearOK = true;
+        }
+        if(this.relic_level){
+        this.relicOK = (this.relic_level_on >= this.relic_level);
+        }else{
+          this.relicOK = true;
+        }
+      }else{
+        this.gearOK = false;
+        this.relicOK = false;
+        this.rarityOK = false;
+      }
+        //item.data.
+      //  relic_tier - 2
+//rarity : stars
+//gear_level
+
         //todo: calculate status
         /* if (itm) {
            let chk = unt.relic_level;
