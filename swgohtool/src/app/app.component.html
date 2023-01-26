@@ -309,7 +309,7 @@
     alt="Angular Logo"
     src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
   />-->
-  <span class=" m-2">Feddy swgoh status tool</span>
+  <span class=" m-2">Swgoh status tool</span>
     
 </div>
 
@@ -344,7 +344,7 @@
       <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
         <div class="accordion-body">
           <div *ngIf="loaded$ | async ">
-            <div *ngFor="let lnd of legends$ | async; index as i"><img  class="img-fluid img-thumbnail" width="32" height="32" *ngIf="lnd.image" [src]="lnd.image" alt="Place image title">
+            <div *ngFor="let lnd of legends$ | async; index as i"><img  class="img-fluid img-thumbnail" width="48" height="48" *ngIf="lnd.image" [src]="lnd.image" alt="Place image title">
               <span [ngClass]="{'text-success': lnd.ok && lnd.ultimate, 'text-warning': lnd.ok && !lnd.ultimate}">{{lnd.name}} - {{lnd.type}} - {{lnd.side}} - {{lnd.ultimate}}</span>
               <div class="ms-4" *ngFor="let unt of lnd.units; index as i">
                 <span [ngClass]="{'text-success': unt.allOK()}">
@@ -368,7 +368,7 @@
       <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
         <div class="accordion-body">
           <div *ngIf="loaded$ | async ">
-            <div *ngFor="let lnd of events$ | async; index as i"><img  class="img-fluid img-thumbnail" width="32" height="32" *ngIf="lnd.image" [src]="lnd.image" alt="Place image title">
+            <div *ngFor="let lnd of events$ | async; index as i"><img  class="img-fluid img-thumbnail" width="48" height="48" *ngIf="lnd.image" [src]="lnd.image" alt="Place image title">
               <span [ngClass]="{'text-success': lnd.ok && lnd.ultimate, 'text-warning': lnd.ok && !lnd.ultimate}">{{lnd.name}} - {{lnd.type}} - {{lnd.side}} - {{lnd.ultimate}}</span>
               <div class="ms-4" *ngFor="let unt of lnd.units; index as i"><span [ngClass]="{'text-success': unt.allOK()}">
                 <img  class="img-fluid img-thumbnail" width="32" height="32" *ngIf="unt.image" [src]="unt.image" alt="Place image title">{{unt.name}} - {{unt.rarityOK}} - {{unt.gearOK}} - {{unt.relicOK}}</span></div>

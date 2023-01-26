@@ -154,7 +154,10 @@ cats.player = player.data;
       }catch(e){
         frm.image = this.shipsobj.find((x: { name: any; })=>x.name == frm.name).image;
      
-      }
+      }        
+      frm.ok = player.units.find((x: { data: { name: string; }; })=>x.data.name == frm.name);
+      frm.ultimate = true;
+
       for (let j = 0; j <= frm.units.length - 1; j++) {
         let unt = frm.units[j];
         let itm = player.units.find((x: { data: any; }) => x.data.name == unt.name);
