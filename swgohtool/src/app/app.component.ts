@@ -40,7 +40,7 @@ export class AppComponent {
   async fetchData(){
     //await this.fetch.populateShips();
     //await this.fetch.populateUnits();
-    //let player = await this.fetch.populatePlayer('357182769'); 
+    //let player = await this.fetch.populatePlayer('357182769');    
     let player = await this.fetch.populatePlayer(this.checkoutForm.get('playerid').value);
     console.log(player);
   }
