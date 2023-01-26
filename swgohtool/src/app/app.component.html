@@ -384,8 +384,10 @@
     </div>
   </div>
 
-  <button  type="button" class="btn btn-primary" (click)="fetchData()">Fetch data</button>
-
+  <form [formGroup]="checkoutForm"  > 
+    <input id="playerid" type="text" formControlName="playerid">
+    <button  type="button" class="btn btn-primary" (click)="fetchData()">Fetch data</button>
+</form>
    <!-- Button trigger modal -->
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click) = "test()">
     Launch demo modal
@@ -410,7 +412,7 @@
     </div>
   </div>
   <!-- Highlight Card 
-  <div class="card highlight-card card-small">
+  <div class="card highlight-card card-small" >
 
     <svg id="rocket" xmlns="http://www.w3.org/2000/svg" width="101.678" height="101.678" viewBox="0 0 101.678 101.678">
       <title>Rocket Ship</title>
