@@ -1,0 +1,107 @@
+
+<div class="card     my-2"  >
+   <!--<div class="card col my-2" >
+-->
+    <!--<img src="..." class="card-img-top" alt="...">-->
+    
+      <div class="card-body w-100 m-0 p-0 bg-dark" >
+      <h5 class="card-title d-flex mb-0 pb-0" [ngClass]="{'bg-success text-white': lnd.ok && lnd.ultimate, 'bg-warning text-white': lnd.ok && !lnd.ultimate, 'bg-danger text-white': !lnd.ok}">
+        <img class=" p-1 m-1" style="border:1px solid #00aaff"   width="64" height="64"
+    *ngIf="lnd.image" [src]="lnd.image" alt="Place image title">
+    <div class="my-auto">
+    <div class="ps-3 ">{{lnd.name}}
+    <!--    - {{lnd.type}} - {{lnd.side}} - {{lnd.ultimate}}-->
+    </div>        <div class="ps-3" *ngIf="lnd.ok && !lnd.ultimate">(No ultimate)</div>
+</div>
+</h5>
+      <div class="card-text  " style="overflow-x: auto;">
+        <table class="table table-dark table-bordered">
+            <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Name</th>
+            <th scope="col">Stars</th>
+            <th scope="col">Gear</th>
+            <th scope="col">Relic</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr  *ngFor="let unt of lnd.units; index as i"  > 
+                <th class="p-0" [ngClass]="{'bg-success': unt.allOK() && unt.hasTheToon(), 'bg-danger':!unt.hasTheToon()}" scope="row"><img  style="border:1px solid #00aaff" width="32" height="32" *ngIf="unt.image" [src]="unt.image" alt="Image from swgoh.gg"></th>
+                <td class="py-0" [ngClass]="{'bg-success': unt.allOK() && unt.hasTheToon(), 'bg-danger':!unt.hasTheToon(), 'bd-yellow-200': unt.hasTheToon() && !unt.allOK()} "><div class="my-1 ">{{unt.name}}</div></td>
+                <td class="py-0" [ngClass]="{'bg-success': unt.rarityOK || unt.allOK(), 'bg-danger':!unt.hasTheToon(), 'bd-yellow-200': unt.hasTheToon() && !unt.rarityOK}"><div class="my-1 text-center">{{unt.stars_on}}/{{unt.stars}}</div></td>
+                <td class="py-0" [ngClass]="{'bg-success': unt.gearOK || unt.allOK(), 'bg-danger':!unt.hasTheToon(), 'bd-yellow-200': unt.hasTheToon() && !unt.gearOK}"> 
+                  <div *ngIf="unt.gear_level" class="my-1 text-center">                    
+                    {{unt.gear_level_on}}/{{unt.gear_level}}
+                </div>
+                </td>
+                <td class="py-0" [ngClass]="{'bg-success': unt.relicOK || unt.allOK(), 'bg-danger':!unt.hasTheToon(), 'bd-yellow-200': unt.hasTheToon() && !unt.relicOK}">
+                    <div *ngIf="unt.relic_level" class="my-1 text-center">                    
+                        {{unt.relic_level_on}}/{{unt.relic_level}}
+                    </div>
+                </td>
+             </tr>
+             <tr  *ngFor="let unt of lnd.ships; index as i"  > 
+                <th class="p-0" [ngClass]="{'bg-success': unt.allOK() && unt.hasTheToon(), 'bg-danger':!unt.hasTheToon()}" scope="row"><img  style="border:1px solid #00aaff" width="32" height="32" *ngIf="unt.image" [src]="unt.image" alt="Image from swgoh.gg"></th>
+                <td class="py-0" [ngClass]="{'bg-success': unt.allOK() && unt.hasTheToon(), 'bg-danger':!unt.hasTheToon(), 'bd-yellow-200': unt.hasTheToon() && !unt.allOK()} "><div class="my-1 ">{{unt.name}}</div></td>
+                <td class="py-0" [ngClass]="{'bg-success': unt.rarityOK || unt.allOK(), 'bg-danger':!unt.hasTheToon(), 'bd-yellow-200': unt.hasTheToon() && !unt.rarityOK}"><div class="my-1 text-center">{{unt.stars_on}}/{{unt.stars}}</div></td>
+                <td class="py-0" [ngClass]="{'bg-success': unt.gearOK || unt.allOK(), 'bg-danger':!unt.hasTheToon(), 'bd-yellow-200': unt.hasTheToon() && !unt.gearOK}"> 
+                  <div *ngIf="unt.gear_level" class="my-1 text-center">                    
+                    {{unt.gear_level_on}}/{{unt.gear_level}}
+                </div>
+                </td>
+                <td class="py-0" [ngClass]="{'bg-success': unt.relicOK || unt.allOK(), 'bg-danger':!unt.hasTheToon(), 'bd-yellow-200': unt.hasTheToon() && !unt.relicOK}">
+                    <div *ngIf="unt.relic_level" class="my-1 text-center">                    
+                        {{unt.relic_level_on}}/{{unt.relic_level}}
+                    </div>
+                </td>
+                         </tr>
+            <!--
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>-->
+        </tbody>
+      
+        </table>
+
+     <!--   <div   *ngFor="let unt of lnd.units; index as i"><span [ngClass]="{'text-success': unt.allOK()}">
+            <img class="img-fluid img-thumbnail" width="32" height="32" *ngIf="unt.image" [src]="unt.image"
+                alt="Place image title">{{unt.name}} - {{unt.rarityOK}} - {{unt.gearOK}} - {{unt.relicOK}}</span>
+        </div>
+        <div   *ngFor="let unt of lnd.ships; index as i"><span [ngClass]="{'text-success': unt.allOK()}">
+            <img class="img-fluid img-thumbnail" width="32" height="32" *ngIf="unt.image" [src]="unt.image"
+                alt="Place image title">{{unt.name}} - {{unt.rarityOK}} - {{unt.gearOK}} - {{unt.relicOK}}</span>
+        </div>-->
+    </div>
+      <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
+    </div>
+  </div>
+
+<!--<img class="img-fluid img-thumbnail" width="48" height="48"
+*ngIf="lnd.image" [src]="lnd.image" alt="Place image title">
+<span [ngClass]="{'text-success': lnd.ok && lnd.ultimate, 'text-warning': lnd.ok && !lnd.ultimate}">{{lnd.name}}
+- {{lnd.type}} - {{lnd.side}} - {{lnd.ultimate}}</span>
+
+<div class="ms-4" *ngFor="let unt of lnd.units; index as i"><span [ngClass]="{'text-success': unt.allOK()}">
+    <img class="img-fluid img-thumbnail" width="32" height="32" *ngIf="unt.image" [src]="unt.image"
+        alt="Place image title">{{unt.name}} - {{unt.rarityOK}} - {{unt.gearOK}} - {{unt.relicOK}}</span>
+</div>
+<div class="ms-4" *ngFor="let unt of lnd.ships; index as i"><span [ngClass]="{'text-success': unt.allOK()}">
+    <img class="img-fluid img-thumbnail" width="32" height="32" *ngIf="unt.image" [src]="unt.image"
+        alt="Place image title">{{unt.name}} - {{unt.rarityOK}} - {{unt.gearOK}} - {{unt.relicOK}}</span>
+</div>-->
+

@@ -61,6 +61,13 @@ export class FetchmeService {
     this._gls.next(newData);
   }
 
+  private _evnts = new BehaviorSubject<any>([]);
+  evnts = this._evnts.asObservable();
+  changeEvnts(newData:any){
+    this._evnts.next(newData);
+  }
+
+
   constructor(private http: HttpClient) { 
 
     this.changeLoaded(false);
@@ -92,6 +99,9 @@ export class FetchmeService {
    }
 
    async populatePlayer(pid:string){
+    if(!pid){
+      return;
+    }
     this.changeLoaded(false);
     await this.populateShips();
     await this.populateUnits();
@@ -155,7 +165,7 @@ cats.player = player.data;
         frm.image = this.shipsobj.find((x: { name: any; })=>x.name == frm.name).image;
      
       }        
-      frm.ok = player.units.find((x: { data: { name: string; }; })=>x.data.name == frm.name);
+      frm.ok = player.units.find((x: { data: { name: string; }; })=>x.data.name == frm.name) != null;
       frm.ultimate = true;
 
       for (let j = 0; j <= frm.units.length - 1; j++) {
@@ -184,6 +194,8 @@ cats.player = player.data;
      }
     }
 
+    let events = cats.events.farms.filter(x=> x.ok);
+    this.changeEvnts(events);
     this.changePlayerData(cats.player);
     this.changeEvents(cats.events.farms);
     this.changeLegends(cats.legends.farms);
