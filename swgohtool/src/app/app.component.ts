@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { categories } from './core/data/cats';
 import { FetchmeService } from './core/utilities/fetchme.service';
 import legends from './core/data/gls'; 
@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup, FormControl, Validators }  from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 
 @Component({
   selector: 'app-root',
@@ -47,6 +48,14 @@ this.route.queryParams
     private formBuilder: FormBuilder,private route: ActivatedRoute,private router: Router){
     console.log("add me");
  
+  }
+
+  //@HostListener('document:keypress', ['$event'])
+  @HostListener('keydown', ['$event'])
+  async fetchData1($event:KeyboardEvent){
+    if ($event.key == "Enter" ){
+      await this.fetchData();
+    }
   }
 
   async fetchData(){

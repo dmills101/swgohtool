@@ -99,6 +99,9 @@ export class FetchmeService {
    }
 
    async populatePlayer(pid:string){
+    if(!pid){
+      return;
+    }
     this.changeLoaded(false);
     await this.populateShips();
     await this.populateUnits();
