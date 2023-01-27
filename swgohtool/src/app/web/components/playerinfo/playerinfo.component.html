@@ -1,0 +1,22 @@
+<div *ngIf="loaded$ | async " class="container pb-2">
+  <h3 class="text-center">
+    <a href="https://swgoh.gg{{(playerdata$ | async).url}}" class="link-warning" target="_blank">{{(playerdata$ | async).name}}</a>
+    <span class="px-1">-</span>
+    <a  href="https://swgoh.gg{{(playerdata$ | async).guild_url}}" class="link-warning " target="_blank">{{(playerdata$ | async).guild_name}}</a>
+    <span class="px-1">-</span>
+    <span  >GP: {{(playerdata$ | async).galactic_power}}</span>
+    
+    
+  </h3>
+  
+</div>
+
+
+<!--<div *ngIf="loaded$ | async ">{{(playerdata$ | async).name}}({{(playerdata$ | async).ally_code}}) - {{(playerdata$ | async).guild_name}} - {{(playerdata$ | async).galactic_power}}  
+    https://swgoh.gg/{{(playerdata$ | async).guild_url}}     https://swgoh.gg/{{(playerdata$ | async).url}}</div>
+
+    <div *ngIf="loaded$ | async ">
+      <div *ngFor="let gls of gls$ | async; index as i">{{gls.data.name}} - {{gls.data.has_ultimate}}</div>
+      </div>
+    -->
+    

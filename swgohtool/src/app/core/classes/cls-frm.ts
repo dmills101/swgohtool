@@ -46,6 +46,10 @@ allOK(){
   return this.gearOK && this.relicOK && this.rarityOK;
 }
 
+hasTheToon(){
+  return this.stars_on>0;
+}
+
     setPlayerItem(item:any, item_orig:any){
       if(item_orig && item_orig.hasOwnProperty('image') && item_orig.image){
         this.image = item_orig.image;
@@ -55,8 +59,11 @@ allOK(){
         this.stars_on = item.data.rarity;
         this.gear_level_on = item.data.gear_level;
         this.relic_level_on = item.data.relic_tier -2;
+        if(this.relic_level_on < 0){
+          this.relic_level_on=0;
+        }
 
-        if(this.name == "Veteran Smuggler Han Solo"){
+        if(this.name == "Grand Inquisitor"){
           console.log('fafa');
         }
         
