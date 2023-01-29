@@ -24,6 +24,7 @@ export class AppComponent {
   events$:Observable<any>= this.fetch.events;
   gls$:Observable<any>= this.fetch.gls;
   evnts$:Observable<any>= this.fetch.evnts;
+  guild$:Observable<any>= this.fetch.guild;
 
 urlparams:any;
   
@@ -42,11 +43,13 @@ this.route.queryParams
   await this.fetch.populatePlayer(this.checkoutForm.controls['playerid'].value);
 }
 );
+
+await this.fetch.populateGuild();
 }
 
   public constructor(private fetch:FetchmeService,
     private formBuilder: FormBuilder,private route: ActivatedRoute,private router: Router){
-    console.log("add me");
+    //console.log("add me");
  
   }
 
@@ -71,8 +74,14 @@ this.route.queryParams
     //console.log(player);
   }
 
+  changeplayer(lnd:any){
+    let lnk = `/?playerid=${lnd.ally_code}`;
+    this.router.navigateByUrl(lnk);
+
+  }
+
   test(){
-    console.log(this.fetch.units);
-    console.log(this.fetch.ships);
+    //console.log(this.fetch.units);
+    //console.log(this.fetch.ships);
   }
 }

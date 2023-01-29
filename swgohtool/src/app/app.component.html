@@ -23,6 +23,12 @@
   <div class="d-none d-md-block  w-40 my-auto  justify-content-end">
     <form [formGroup]="checkoutForm"  > 
       <div class="d-flex">
+        <button class="btn btn-outline-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Feddy</button>
+        <ul class="dropdown-menu">
+          <li *ngFor="let lnd of guild$ | async; index as i"><button class="dropdown-item" (click)="changeplayer(lnd)">{{lnd.player_name}}(GP:{{lnd.galactic_power}})</button>
+           
+          </li> 
+        </ul>
          <input   type="text" formControlName="playerid" placeholder="Ally code..." class="form-control">
         <button  type="button" class="btn  btn-primary ms-1" (click)="fetchData()">Get</button>
       </div>
@@ -33,6 +39,12 @@
   <div class="d-block d-md-none  w-100 my-auto d-flex ">
     <form [formGroup]="checkoutForm" class="w-100 pb-2" > 
       <div class="d-flex">
+        <button class="btn btn-outline-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Feddy</button>
+        <ul class="dropdown-menu">
+          <li *ngFor="let lnd of guild$ | async; index as i"><button class="dropdown-item" (click)="changeplayer(lnd)">{{lnd.player_name}}(GP:{{lnd.galactic_power}})</button>
+           
+          </li> 
+        </ul>
          <input  type="text" formControlName="playerid" placeholder="Ally code..." class="form-control" (keydown.enter) ="fetchData()" >
         <button  type="button" class="btn  btn-primary ms-1" (click)="fetchData()">Get</button>
       </div>
