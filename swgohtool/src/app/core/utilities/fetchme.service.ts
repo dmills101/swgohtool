@@ -67,6 +67,11 @@ export class FetchmeService {
     this._evnts.next(newData);
   }
 
+  private _guild = new BehaviorSubject<any>([]);
+  guild = this._guild.asObservable();
+  changeGuild(newData:any){
+    this._guild.next(newData);
+  }
 
   constructor(private http: HttpClient) { 
 
@@ -89,6 +94,16 @@ export class FetchmeService {
      
    }
 
+   async getDataForGuild(){
+    //http://api.swgoh.gg/guild-profile/7skNKIClReOBSq8jfL_F0g
+    const url__in = `${this.proxy_cors}http://api.swgoh.gg/guild-profile/7skNKIClReOBSq8jfL_F0g/`;
+    const headers= new HttpHeaders()
+  .set('content-type', 'application/json')
+  .set('Access-Control-Allow-Origin', '*');
+    return this.http.get(url__in, {headers:headers}).toPromise();
+
+   }
+
    async getDataForPlayer(pid:string){
     const url__in = `${this.proxy_cors}http://api.swgoh.gg/player/${pid}/`;
     const headers= new HttpHeaders()
@@ -98,8 +113,35 @@ export class FetchmeService {
      
    }
 
+   objectComparisonCallback = (arrayItemA:any, arrayItemB:any) => {
+    if (arrayItemA.galactic_power < arrayItemB.galactic_power) {
+      return 1
+    }
+  
+    if (arrayItemA.galactic_power > arrayItemB.galactic_power) {
+      return -1
+    }
+  
+    return 0
+  }
+
+   async populateGuild(){
+    let data = await this.getDataForGuild();
+    let jsonstr = JSON.stringify(data);
+    let guild = JSON.parse(jsonstr);
+    /*
+members.
+  player_name
+  ally_code
+  galactic_power
+*/
+    //console.log(data);
+    let ddt = guild.data.members.sort(this.objectComparisonCallback);
+    this.changeGuild(ddt);
+   }
+
    async populatePlayer(pid:string){
-    if(!pid){
+     if(!pid){
       return;
     }
     this.changeLoaded(false);
@@ -107,7 +149,7 @@ export class FetchmeService {
     await this.populateUnits();
       let data = await this.getDataForPlayer(pid);
       
-      console.log(data);
+      //console.log(data);
       let jsonstr = JSON.stringify(data);
       let player = JSON.parse(jsonstr);
      // let dv = player.units.find((x: { data: any; })=>x.data.name == 'Darth Vader');
@@ -215,14 +257,14 @@ cats.player = player.data;
 
    async populateShips(){
     let data = await this.getDataFor('ships');
-    console.log(data);
+    //console.log(data);
     this.changeShips(data);
     return data;
    }
 
    async populateUnits(){
     let data = await this.getDataFor('characters');
-    console.log(data);
+    //console.log(data);
     this.changeUnits(data);
     return data;
 

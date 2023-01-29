@@ -64,7 +64,7 @@ hasTheToon(){
         }
 
         if(this.name == "Grand Inquisitor"){
-          console.log('fafa');
+          //console.log('fafa');
         }
         
         this.rarityOK = (this.stars_on >= this.stars);
