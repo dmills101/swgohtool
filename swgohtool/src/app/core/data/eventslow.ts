@@ -63,7 +63,41 @@ export class Eventslow {
                     new FarmUnit('Home One', 7),
                  ],
                 ),
-
+                new Farm(
+                    'Finalizer',
+                    'event',
+                    'dark',
+                    [],
+                    [
+                        new FarmUnit('First Order TIE Fighter', 7),
+                    new FarmUnit(`Hound's Tooth`, 7),
+                    new FarmUnit(`Kylo Ren's Command Shuttle`, 7),
+                    new FarmUnit('Slave I', 7),
+                    new FarmUnit('TIE Silencer', 7),
+                    new FarmUnit('TIE Advanced x1', 7),
+                    new FarmUnit('Xanadu Blood', 7),
+                    new FarmUnit('Executrix', 7),
+                    new FarmUnit('Home One', 7),
+                    new FarmUnit('Endurance', 7),],
+                ),
+                new Farm(
+                    'Raddus',
+                    'event',
+                    'light',
+                    [],
+                    [
+                        new FarmUnit(`Rey's Millennium Falcon`, 7),
+                        new FarmUnit(`Resistance X-wing`, 7),
+                        new FarmUnit(`Poe Dameron's X-wing`, 7),
+                        new FarmUnit(`Hound's Tooth`, 7),
+                        new FarmUnit('Ebon Hawk', 7),
+                        new FarmUnit(`Ahsoka Tano's Jedi Starfighter`, 7),
+                        new FarmUnit(`Lando's Millennium Falcon`, 7),
+                        new FarmUnit('Executrix', 7),
+                        new FarmUnit('Home One', 7),
+                        new FarmUnit('Endurance', 7),
+                    ],
+                ),
             ]
         )
         
