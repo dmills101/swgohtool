@@ -10,6 +10,9 @@ import { PlayerinfoComponent } from './web/components/playerinfo/playerinfo.comp
 import { GalacticlegendsComponent } from './web/components/galacticlegends/galacticlegends.component';
 import { EventsComponent } from './web/components/events/events.component';
 import { SwCardComponent } from './web/components/sw-card/sw-card.component';
+import { EventslowComponent } from './web/components/eventslow/eventslow.component';
+import { GoodteamsComponent } from './web/components/goodteams/goodteams.component';
+import { CpitComponent } from './web/components/cpit/cpit.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { SwCardComponent } from './web/components/sw-card/sw-card.component';
     PlayerinfoComponent,
     GalacticlegendsComponent,
     EventsComponent,
-    SwCardComponent 
+    SwCardComponent,
+    EventslowComponent,
+    GoodteamsComponent,
+    CpitComponent 
   ],
   imports: [
     BrowserModule,

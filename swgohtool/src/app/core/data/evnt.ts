@@ -163,7 +163,8 @@ export class EventsCls {
             return this.pkfarm;
         }
 }
-export default new FarmCategory(
+/*export default new FarmCategory(
+
     'Events',
     [
         new Farm(
@@ -314,3 +315,4 @@ export default new FarmCategory(
         ),   
     ]
 )
+*/

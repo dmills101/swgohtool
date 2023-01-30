@@ -5,13 +5,16 @@
     <!--<img src="..." class="card-img-top" alt="...">-->
     
       <div class="card-body w-100 m-0 p-0 bg-dark" >
-      <h5 class="card-title d-flex mb-0 pb-0" [ngClass]="{'bg-success text-white': lnd.ok && lnd.ultimate, 'bg-warning text-white': lnd.ok && !lnd.ultimate, 'bg-danger text-white': !lnd.ok}">
+      <h5 class="card-title d-flex mb-0 pb-0" [ngClass]="{'bg-success text-white': lnd.ok && lnd.ultimate , 'bg-warning text-white': (lnd.ok && !lnd.ultimate) || (!lnd.ok && lnd.ultimate && lnd.foundText), 'bg-danger text-white': !lnd.ok && !lnd.foundText}">
         <img class=" p-1 m-1" style="border:1px solid #00aaff"   width="64" height="64"
     *ngIf="lnd.image" [src]="lnd.image" alt="Place image title">
     <div class="my-auto">
-    <div class="ps-3 ">{{lnd.name}}
+      <div class="ps-3" *ngIf="lnd.description">{{lnd.description}}</div>
+      <div class="ps-3 ">{{lnd.name}} <span *ngIf="lnd.foundText">Stars:({{lnd.foundText}})</span>
     <!--    - {{lnd.type}} - {{lnd.side}} - {{lnd.ultimate}}-->
+     
     </div>        <div class="ps-3" *ngIf="lnd.ok && !lnd.ultimate">(No ultimate)</div>
+
 </div>
 </h5>
       <div class="card-text  " style="overflow-x: auto;">

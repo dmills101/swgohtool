@@ -1,7 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { categories } from './core/data/cats';
 import { FetchmeService } from './core/utilities/fetchme.service';
-import legends from './core/data/gls'; 
+//import legends from './core/data/gls'; 
 import { Observable } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup, FormControl, Validators }  from '@angular/forms';
@@ -22,9 +22,15 @@ export class AppComponent {
   loaded$:Observable<any>= this.fetch.loaded;
   legends$:Observable<any>= this.fetch.legends;
   events$:Observable<any>= this.fetch.events;
+  eventslow$:Observable<any>= this.fetch.eventslow;
   gls$:Observable<any>= this.fetch.gls;
   evnts$:Observable<any>= this.fetch.evnts;
+  evntslw$:Observable<any>= this.fetch.evntslw;
   guild$:Observable<any>= this.fetch.guild;
+  goodteams$:Observable<any>= this.fetch.goodteams;
+  goodteamslw$:Observable<any>= this.fetch.goodteamslw;
+  cpit$:Observable<any>= this.fetch.cpit;
+  cpitlw$:Observable<any>= this.fetch.cpitlw;
 
 urlparams:any;
   
