@@ -80,13 +80,13 @@ export class Eventslow {
                     new FarmUnit('Home One', 7),
                     new FarmUnit('Endurance', 7),],
                 ),
-                new Farm(
+                new Farm( 
                     'Raddus',
                     'event',
                     'light',
                     [],
                     [
-                        new FarmUnit(`Rey's Millennium Falcon`, 7),
+                        new FarmUnit(`Rey's Millennium Falcon`, 7), 
                         new FarmUnit(`Resistance X-wing`, 7),
                         new FarmUnit(`Poe Dameron's X-wing`, 7),
                         new FarmUnit(`Hound's Tooth`, 7),

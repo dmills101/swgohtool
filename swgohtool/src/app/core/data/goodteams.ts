@@ -16,11 +16,11 @@ export class Goodteams {
                     'event',
                     'light',
                     [
-                        new FarmUnit('Geonosian Brood Alpha', 7),
-                        new FarmUnit('Geonosian Soldier', 7),
-                        new FarmUnit('Geonosian Spy', 7),
-                        new FarmUnit('Poggle the Lesser', 7),
-                        new FarmUnit('Sun Fac', 7),
+                        new FarmUnit('Geonosian Brood Alpha', 7,12),
+                        new FarmUnit('Geonosian Soldier', 7,12),
+                        new FarmUnit('Geonosian Spy', 7,12),
+                        new FarmUnit('Poggle the Lesser', 7,12),
+                        new FarmUnit('Sun Fac', 7,12),
                       
                     ],
                     [],

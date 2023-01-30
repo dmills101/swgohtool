@@ -13,7 +13,9 @@ import { categories } from '../data/cats';
 })
 export class FetchmeService {
 
-  proxy_cors = "https://corsproxy.io/?";
+  //proxy_cors = "https://corsproxy.io/?";
+  proxy_cors = "https://panosweb.se/px/proxy.php?url=";
+  //              https://panosweb.se/proxy/proxy.php?url=http://api.swgoh.gg/ships/
 
   private _ships = new BehaviorSubject<any>([]);
   ships = this._ships.asObservable();
