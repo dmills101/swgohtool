@@ -147,6 +147,7 @@ members.
     this.changeLoaded(false);
     await this.populateShips();
     await this.populateUnits();
+    
       let data = await this.getDataForPlayer(pid);
       
       //console.log(data);
@@ -161,7 +162,8 @@ members.
     this.changeGls(gls_with_ultimate);
 
     let cats = new categories();
-cats.player = player.data;
+    cats.renew();
+    cats.player = player.data;
      for (let i = 0; i <= cats.legends.farms.length - 1; i++) {
        let frm = cats.legends.farms[i];
        try{

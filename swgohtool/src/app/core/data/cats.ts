@@ -1,12 +1,18 @@
 import { FarmCategory } from "../classes/cls-frm"
 import { flatten, forEach, map } from 'lodash'
-import events from './evnt'
-import legends from './gls'
+import events, { EventsCls } from './evnt'
+import legends, { Gls } from './gls'
 
 export  class categories {
-    legends = legends;
-    events = events;
+    legends = new Gls().renew();
+    events = new EventsCls().renew();
     player:any;
+
+    renew(){
+        this.legends = new Gls().renew();
+        this.events = new EventsCls().renew();
+        this.player = null;
+    }
 }
 
 /*export const flat_categories = [
