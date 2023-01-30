@@ -65,7 +65,7 @@
  
 
 <div class="accordion" id="accordionPanelsStayOpenExample" *ngIf="loaded$ | async " >
-   
+
   <div class="accordion-item bg-dark">
     <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
       <button class="accordion-button bg-dark text-white " type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
@@ -91,7 +91,44 @@
       </div>
     </div>
   </div>
+  <div class="accordion-item bg-dark">
+    <h2 class="accordion-header" id="panelsStayOpen-headingThree1">
+      <button class="accordion-button bg-dark text-white " type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree1" aria-expanded="true" aria-controls="panelsStayOpen-collapseThree1">
+        <h4 class="text-warning  ">Events Low ({{(evntslw$ | async).length}}/{{(eventslow$ | async).length}})</h4>
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseThree1" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree1">
+      <div class="accordion-body p-0">
+        <app-eventslow></app-eventslow>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item bg-dark">
+    <h2 class="accordion-header" id="panelsStayOpen-headingZ0">
+      <button class="accordion-button bg-dark text-white " type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseZ0" aria-expanded="true" aria-controls="panelsStayOpen-collapseZ0">
+        <h4 class="text-warning  ">Good teams</h4>
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseZ0" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingZ0">
+      <div class="accordion-body p-0">
+        <app-goodteams></app-goodteams>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item bg-dark">
+    <h2 class="accordion-header" id="panelsStayOpen-headingZ1">
+      <button class="accordion-button bg-dark text-white " type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseZ1" aria-expanded="true" aria-controls="panelsStayOpen-collapseZ1">
+        <h4 class="text-warning  ">Cpit</h4>
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseZ1" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingZ1">
+      <div class="accordion-body p-0">
+        <app-cpit></app-cpit>
+      </div>
+    </div>
+  </div>
 </div>
+
 
  
    <!-- Button trigger modal

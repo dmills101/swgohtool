@@ -182,7 +182,7 @@ export class Gls {
 }
 
 
-export default new FarmCategory(
+/*export default new FarmCategory(
     'Galactic Legends',
     [
         new Farm(
@@ -351,3 +351,4 @@ export default new FarmCategory(
         ),
     ]
 )
+*/

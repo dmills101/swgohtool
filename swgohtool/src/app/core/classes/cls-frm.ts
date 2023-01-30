@@ -1,19 +1,34 @@
 export class Farm {
-    name: string
-    type: string
-    side: string
-    units: FarmUnit[]
-    ships: FarmUnit[]
+    name: string;
+    type: string;
+    side: string;
+    units: FarmUnit[];
+    ships: FarmUnit[];
     image:any = null;
     ok:boolean = false;
     ultimate:boolean = false;
+  found:any;
+  foundText:any = null;
+  description: string;
 
-    constructor(name: string, type: string, side: string, units: FarmUnit[], ships: FarmUnit[]) {
+
+    constructor(name: string, type: string, side: string, units: FarmUnit[], ships: FarmUnit[],desc:any=null) {
         this.name = name
         this.side = side
         this.units = units
         this.ships = ships
         this.type = type;
+        this.foundText =null;
+        this.description =desc;
+    }
+
+    setFound(found:any){
+      this.found =found;
+      if(found.data.rarity != 7){
+        this.foundText = `${found.data.rarity}/7`;
+      }else{
+        this.foundText=null;
+      }
     }
 }
 
