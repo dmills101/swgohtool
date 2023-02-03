@@ -1,0 +1,10 @@
+<div *ngIf="loaded$ | async " class="container-fluid  ">
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-4">
+  
+      <div *ngFor="let lnd of list | async; index as i" class="col">
+        <app-sw-card [lnd] = "lnd"></app-sw-card>
+        
+    </div>
+  </div>
+  </div>
+  

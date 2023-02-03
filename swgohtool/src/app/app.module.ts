@@ -14,6 +14,7 @@ import { EventslowComponent } from './web/components/eventslow/eventslow.compone
 import { GoodteamsComponent } from './web/components/goodteams/goodteams.component';
 import { CpitComponent } from './web/components/cpit/cpit.component';
 import { LoadingComponent } from './web/components/loading/loading.component';
+import { GeneralcategoryComponent } from './web/components/generalcategory/generalcategory.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LoadingComponent } from './web/components/loading/loading.component';
     EventslowComponent,
     GoodteamsComponent,
     CpitComponent,
-    LoadingComponent 
+    LoadingComponent,
+    GeneralcategoryComponent 
   ],
   imports: [
     BrowserModule,

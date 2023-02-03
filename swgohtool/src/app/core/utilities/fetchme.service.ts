@@ -343,6 +343,13 @@ members.
     let gtlw = cats.goodteams.farms.filter(x=> x.ok);
     this.changeGoodTeamsLW(gtlw);
 
+    try{
+    var d1 = new Date(cats.player.last_updated);
+var d2 = new Date();
+    cats.player.last_update_sub = (Math.abs(d2.getTime() - d1.getTime()) / 3600000).toFixed(0);
+    }catch(e){
+      console.error(e);
+    }
      this.changePlayerData(cats.player);
     this.changeEvents(cats.events.farms);
     this.changeLegends(cats.legends.farms);
