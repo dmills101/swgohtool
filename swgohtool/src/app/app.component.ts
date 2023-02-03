@@ -48,10 +48,14 @@ this.route.queryParams
   this.urlparams=params;
   //console.log(params); // { orderby: "price" }
   if(params['playerid']){
+    //if(!this.loading){ 
     this.loading = true;
+    //console.log(`${params['playerid']} != ${this.checkoutForm.controls['playerid'].value}`);
+    console.log(`Populating2: ${params['playerid']} != ${this.checkoutForm.controls['playerid'].value}`)
     this.checkoutForm.patchValue({playerid:params['playerid']});
   await this.fetch.populatePlayer(this.checkoutForm.controls['playerid'].value);
   this.loading = false;
+    //}
   }
 
 }
@@ -78,10 +82,15 @@ await this.fetch.populateGuild();
     //await this.fetch.populateShips();
     //await this.fetch.populateUnits();
     //let player = await this.fetch.populatePlayer('357182769');    
+    //console.log(`${this.urlparams['playerid']} != ${this.checkoutForm.controls['playerid'].value}`);
     if(this.urlparams['playerid'] != this.checkoutForm.controls['playerid'].value){
+      this.loading = true;
+      this.checkoutForm.patchValue({playerid:this.checkoutForm.controls['playerid'].value});
       let lnk = `/?playerid=${this.checkoutForm.controls['playerid'].value}`;
+      console.log(`Populating1: ${lnk}`)
       this.router.navigateByUrl(lnk);
     }else{
+      console.log(`Populating0: ${this.checkoutForm.controls['playerid'].value}`)
       this.loading = true;
       let player = await this.fetch.populatePlayer(this.checkoutForm.controls['playerid'].value);
       this.loading = false;
@@ -89,8 +98,14 @@ await this.fetch.populateGuild();
     //console.log(player);
   }
 
-  changeplayer(lnd:any){
+  handleSubmit(e:any){
+    e.preventDefault();
+    //alert('this.msg');
+  }
+
+  async changeplayer(lnd:any){
     let lnk = `/?playerid=${lnd.ally_code}`;
+    console.log(`Populating3: ${lnk}`)
     this.router.navigateByUrl(lnk);
 
   }

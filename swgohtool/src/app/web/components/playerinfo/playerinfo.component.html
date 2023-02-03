@@ -4,7 +4,8 @@
     <span class="px-1">-</span>
     <a  href="https://swgoh.gg{{(playerdata$ | async).guild_url}}" class="link-warning " target="_blank">{{(playerdata$ | async).guild_name}}</a>
     <span class="px-1">-</span>
-    <span  >GP: {{(playerdata$ | async).galactic_power}}</span>
+    <span  >GP: {{(playerdata$ | async).galactic_power}}  
+      <span class="d-block text-muted h6" *ngIf="(playerdata$ | async).last_update_sub">last updated {{(playerdata$ | async).last_update_sub}} hours ago</span></span>
     
     
   </h3>

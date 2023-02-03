@@ -17,7 +17,14 @@ cpit
 https://imgur.com/a/iGZObX5
 
 //Release notes
-2023-02-03
+v1.2
+    Bug fix: Loading component not in center
+    Bug fix: When pressing enter the function gets the first of the feddy list
+    Feature: add last updated
+    Feature: Compare last updated with now
+    
+
+2023-02-03 v1.1
     Added loading component
     Added min power for toons
     Added min power for ships
