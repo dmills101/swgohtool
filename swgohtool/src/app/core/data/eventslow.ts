@@ -13,6 +13,19 @@ export class Eventslow {
             'Events',
             [
                 new Farm(
+                    'The Mandalorian (Beskar Armor)',
+                    'event',
+                    'light',
+                    [
+                        new FarmUnit('Kuiil', 7),
+                        new FarmUnit('Cara Dune', 7),
+                        new FarmUnit('IG-11', 7),
+                        new FarmUnit('Greef Karga', 7),
+                        new FarmUnit('The Mandalorian', 7),
+                    ],
+                    [],
+                ),
+                    new Farm(
                     'C-3PO',
                     'event',
                     'light',

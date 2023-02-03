@@ -10,9 +10,9 @@ export class Farm {
   found:any;
   foundText:any = null;
   description: string;
+hasminimumpower:boolean=false;
 
-
-    constructor(name: string, type: string, side: string, units: FarmUnit[], ships: FarmUnit[],desc:any=null) {
+    constructor(name: string, type: string, side: string, units: FarmUnit[], ships: FarmUnit[],desc:any=null,hasminimumpower:boolean=false) {
         this.name = name
         this.side = side
         this.units = units
@@ -20,6 +20,7 @@ export class Farm {
         this.type = type;
         this.foundText =null;
         this.description =desc;
+        this.hasminimumpower=hasminimumpower;
     }
 
     setFound(found:any){
@@ -37,28 +38,34 @@ export class FarmUnit {
     stars: number
     gear_level?: number
     relic_level?: number
-
+    minimum_power_toon?: number=0;
+    minimum_power_ship?: number=0;
 player_itm:any;
 
   rarityOK:boolean=false;
   gearOK:boolean=false;
   relicOK:boolean = false;
+  minimumpowerok:boolean = false;
 
   stars_on: number=0;
   gear_level_on: number=0;
   relic_level_on: number=0;
+  power:number = 0;
 
   image:any = null;
 
-    constructor(name: string, stars: number, gear_level?: number, relic_level?: number) {
-        this.name = name
-        this.stars = stars
-        this.gear_level = gear_level
-        this.relic_level = relic_level
+    constructor(name: string, stars: number, gear_level?: number, relic_level?: number,minimum_power_toon?: number,minimum_power_ship?: number) {
+        this.name = name;
+        this.stars = stars;
+        this.gear_level = gear_level;
+        this.relic_level = relic_level;
+        this.minimum_power_toon = minimum_power_toon;
+        this.minimum_power_ship = minimum_power_ship;
+
     }
 
 allOK(){
-  return this.gearOK && this.relicOK && this.rarityOK;
+  return this.gearOK && this.relicOK && this.rarityOK && this.minimumpowerok;
 }
 
 hasTheToon(){
@@ -72,6 +79,7 @@ hasTheToon(){
         this.player_itm = item;
         if(item && item.hasOwnProperty('data') && item.data){
         this.stars_on = item.data.rarity;
+        this.power = item.data.power;
         this.gear_level_on = item.data.gear_level;
         this.relic_level_on = item.data.relic_tier -2;
         if(this.relic_level_on < 0){
@@ -98,6 +106,41 @@ hasTheToon(){
         this.relicOK = false;
         this.rarityOK = false;
       }
+
+      if(this.minimum_power_ship){
+      if(this.minimum_power_ship  && item && item.hasOwnProperty('data') && item.data){
+        if(this.minimum_power_ship > item.data.power){
+          this.minimumpowerok = false;
+        }else{
+          this.minimumpowerok=true;
+        }
+        //this.minimumpowerok = (this.minimum_power_ship >> item.data.power)?false:true;
+      }else  {
+        this.minimumpowerok= true;
+        if(this.minimum_power_ship){
+          this.minimumpowerok = false;
+        }
+      } 
+    }
+    if(this.minimum_power_toon){
+      if(this.minimum_power_toon   && item && item.hasOwnProperty('data') && item.data){
+        if(this.minimum_power_toon > item.data.power){
+          this.minimumpowerok = false;
+        }else{
+          this.minimumpowerok=true;
+        }
+        //this.minimumpowerok = (this.minimum_power_toon >> item.data.power)?false:true;
+      }else  {
+        this.minimumpowerok= true;
+        if(this.minimum_power_toon){
+          this.minimumpowerok = false;
+        }
+      } 
+    }
+
+    if(!this.minimum_power_ship && !this.minimum_power_toon){
+      this.minimumpowerok=true;
+    }
         //item.data.
       //  relic_tier - 2
 //rarity : stars
