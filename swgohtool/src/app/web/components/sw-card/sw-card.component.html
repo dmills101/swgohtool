@@ -10,7 +10,9 @@
     *ngIf="lnd.image" [src]="lnd.image" alt="Place image title">
     <div class="my-auto">
       <div class="ps-3" *ngIf="lnd.description">{{lnd.description}}</div>
-      <div class="ps-3 ">{{lnd.name}} <span *ngIf="lnd.foundText">Stars:({{lnd.foundText}})</span>
+      <div class="ps-3 ">{{lnd.name}}
+        <span *ngIf="lnd.ok && lnd.ultimate">&#x2713;</span>
+        <span *ngIf="lnd.foundText">Stars:({{lnd.foundText}})</span>
     <!--    - {{lnd.type}} - {{lnd.side}} - {{lnd.ultimate}}-->
      
     </div>        <div class="ps-3" *ngIf="lnd.ok && !lnd.ultimate">(No ultimate)</div>
@@ -23,9 +25,10 @@
           <tr>
             <th scope="col"></th>
             <th scope="col">Name</th>
-            <th scope="col">Stars</th>
-            <th scope="col">Gear</th>
-            <th scope="col">Relic</th>
+            <th scope="col" class="my-1 text-center">Stars</th>
+            <th scope="col" class="my-1 text-center">Gear</th>
+            <th scope="col" class="my-1 text-center">Relic</th>
+            <th scope="col" *ngIf="lnd.hasminimumpower">Power</th>
           </tr>
         </thead>
         <tbody>
@@ -37,12 +40,27 @@
                   <div *ngIf="unt.gear_level" class="my-1 text-center">                    
                     {{unt.gear_level_on}}/{{unt.gear_level}}
                 </div>
+                <div *ngIf="!unt.gear_level && unt.gear_level_on" class="my-1 text-center">                    
+                  {{unt.gear_level_on}}
+              </div>
                 </td>
                 <td class="py-0" [ngClass]="{'bg-success': unt.relicOK || unt.allOK(), 'bg-danger':!unt.hasTheToon(), 'bd-yellow-200': unt.hasTheToon() && !unt.relicOK}">
                     <div *ngIf="unt.relic_level" class="my-1 text-center">                    
                         {{unt.relic_level_on}}/{{unt.relic_level}}
                     </div>
+                    <div *ngIf="!unt.relic_level && unt.relic_level_on" class="my-1 text-center">                    
+                      {{unt.relic_level_on}}
+                  </div>
                 </td>
+                <td class="py-0" *ngIf="lnd.hasminimumpower " [ngClass]="{'bg-success': unt.minimumpowerok || unt.allOK(), 'bg-danger':!unt.hasTheToon(), 'bd-yellow-200': unt.hasTheToon() && !unt.minimumpowerok}">
+                  <div *ngIf="!unt.minimumpowerok">
+                    {{unt.power}}/{{unt.minimum_power_toon}}
+                 </div>
+                 <div *ngIf="unt.minimumpowerok  && unt.hasTheToon()">
+                  &#x2713;
+
+                 </div>
+              </td>
              </tr>
              <tr  *ngFor="let unt of lnd.ships; index as i"  > 
                 <th class="p-0" [ngClass]="{'bg-success': unt.allOK() && unt.hasTheToon(), 'bg-danger':!unt.hasTheToon()}" scope="row"><img  style="border:1px solid #00aaff" width="32" height="32" *ngIf="unt.image" [src]="unt.image" alt="Image from swgoh.gg"></th>
@@ -52,13 +70,24 @@
                   <div *ngIf="unt.gear_level" class="my-1 text-center">                    
                     {{unt.gear_level_on}}/{{unt.gear_level}}
                 </div>
-                </td>
+                 
+                 </td>
                 <td class="py-0" [ngClass]="{'bg-success': unt.relicOK || unt.allOK(), 'bg-danger':!unt.hasTheToon(), 'bd-yellow-200': unt.hasTheToon() && !unt.relicOK}">
                     <div *ngIf="unt.relic_level" class="my-1 text-center">                    
                         {{unt.relic_level_on}}/{{unt.relic_level}}
                     </div>
                 </td>
-                         </tr>
+                <td class="py-0" *ngIf="lnd.hasminimumpower " [ngClass]="{'bg-success': unt.minimumpowerok || unt.allOK(), 'bg-danger':!unt.hasTheToon(), 'bd-yellow-200': unt.hasTheToon() && !unt.minimumpowerok}">
+                  <div *ngIf="!unt.minimumpowerok">
+                    {{unt.power}}/{{unt.minimum_power_ship}}
+                 </div>
+                 <div *ngIf="unt.minimumpowerok && unt.hasTheToon()">
+                  &#x2713;
+
+
+                 </div>
+                </td>
+              </tr>
             <!--
           <tr>
             <th scope="row">1</th>

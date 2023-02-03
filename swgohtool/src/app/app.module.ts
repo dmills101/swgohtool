@@ -13,6 +13,7 @@ import { SwCardComponent } from './web/components/sw-card/sw-card.component';
 import { EventslowComponent } from './web/components/eventslow/eventslow.component';
 import { GoodteamsComponent } from './web/components/goodteams/goodteams.component';
 import { CpitComponent } from './web/components/cpit/cpit.component';
+import { LoadingComponent } from './web/components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CpitComponent } from './web/components/cpit/cpit.component';
     SwCardComponent,
     EventslowComponent,
     GoodteamsComponent,
-    CpitComponent 
+    CpitComponent,
+    LoadingComponent 
   ],
   imports: [
     BrowserModule,

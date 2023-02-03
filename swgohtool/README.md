@@ -15,3 +15,14 @@ ng build swgohtool --configuration production --base-href="/feddytool/" --output
 
 cpit
 https://imgur.com/a/iGZObX5
+
+//Release notes
+2023-02-03
+    Added loading component
+    Added min power for toons
+    Added min power for ships
+    Fixed GAS and malak
+    Added check mark if Farm is ok
+    Added check mark if power required is ok
+    Added beskar mando
+    Added version text

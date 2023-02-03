@@ -38,6 +38,8 @@ urlparams:any;
     playerid: ''//'142367359','357182769'
   });
 
+  loading = false;
+
   async ngOnInit(){
    // this.playerdata$ 
 //this.loaded$ = this.fetch.loaded;
@@ -45,8 +47,13 @@ this.route.queryParams
 .subscribe(async params => {
   this.urlparams=params;
   //console.log(params); // { orderby: "price" }
-  this.checkoutForm.patchValue({playerid:params['playerid']});
+  if(params['playerid']){
+    this.loading = true;
+    this.checkoutForm.patchValue({playerid:params['playerid']});
   await this.fetch.populatePlayer(this.checkoutForm.controls['playerid'].value);
+  this.loading = false;
+  }
+
 }
 );
 
@@ -75,7 +82,9 @@ await this.fetch.populateGuild();
       let lnk = `/?playerid=${this.checkoutForm.controls['playerid'].value}`;
       this.router.navigateByUrl(lnk);
     }else{
-    let player = await this.fetch.populatePlayer(this.checkoutForm.controls['playerid'].value);
+      this.loading = true;
+      let player = await this.fetch.populatePlayer(this.checkoutForm.controls['playerid'].value);
+      this.loading = false;
     }
     //console.log(player);
   }
