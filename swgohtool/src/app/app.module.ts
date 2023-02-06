@@ -15,6 +15,7 @@ import { GoodteamsComponent } from './web/components/goodteams/goodteams.compone
 import { CpitComponent } from './web/components/cpit/cpit.component';
 import { LoadingComponent } from './web/components/loading/loading.component';
 import { GeneralcategoryComponent } from './web/components/generalcategory/generalcategory.component';
+import { ImageLogoComponent } from './web/components/image-logo/image-logo.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { GeneralcategoryComponent } from './web/components/generalcategory/gener
     GoodteamsComponent,
     CpitComponent,
     LoadingComponent,
-    GeneralcategoryComponent 
+    GeneralcategoryComponent,
+    ImageLogoComponent 
   ],
   imports: [
     BrowserModule,
