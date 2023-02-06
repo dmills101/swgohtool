@@ -1,7 +1,7 @@
-import { Evnt } from './evnt';
+import { EventsCls } from './evnt';
 
-describe('Evnt', () => {
+describe('EventsCls', () => {
   it('should create an instance', () => {
-    expect(new Evnt()).toBeTruthy();
+    expect(new EventsCls()).toBeTruthy();
   });
 });

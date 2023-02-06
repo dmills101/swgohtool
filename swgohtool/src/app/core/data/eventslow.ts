@@ -1,15 +1,15 @@
- 
+
 
 import { Farm, FarmCategory, FarmUnit } from "../classes/cls-frm";
 export class Eventslow {
-    public pkfarm:FarmCategory | undefined;
+    public pkfarm: FarmCategory | undefined;
 
-    public constructor(){
+    public constructor() {
         this.renew();
     }
 
-    public renew():FarmCategory{
-         this.pkfarm =  new FarmCategory(
+    public renew(): FarmCategory {
+        this.pkfarm = new FarmCategory(
             'Events',
             [
                 new Farm(
@@ -25,7 +25,7 @@ export class Eventslow {
                     ],
                     [],
                 ),
-                    new Farm(
+                new Farm(
                     'C-3PO',
                     'event',
                     'light',
@@ -40,7 +40,7 @@ export class Eventslow {
                     ],
                     [],
                 ),
-                
+
                 new Farm(
                     'Chewbacca',
                     'event',
@@ -63,18 +63,18 @@ export class Eventslow {
                     'event',
                     'light',
                     [
-                      
+
                     ],
-                    [  
+                    [
                         new FarmUnit("Hound's Tooth", 7),
-                    new FarmUnit('Slave I', 7),
-                    new FarmUnit('Xanadu Blood', 7),
-                    new FarmUnit('IG-2000', 7),
-                    new FarmUnit('Razor Crest', 7),
-                    new FarmUnit('Chimaera', 7),
-                    new FarmUnit('Endurance', 7),
-                    new FarmUnit('Home One', 7),
-                 ],
+                        new FarmUnit('Slave I', 7),
+                        new FarmUnit('Xanadu Blood', 7),
+                        new FarmUnit('IG-2000', 7),
+                        new FarmUnit('Razor Crest', 7),
+                        new FarmUnit('Chimaera', 7),
+                        new FarmUnit('Endurance', 7),
+                        new FarmUnit('Home One', 7),
+                    ],
                 ),
                 new Farm(
                     'Finalizer',
@@ -83,23 +83,23 @@ export class Eventslow {
                     [],
                     [
                         new FarmUnit('First Order TIE Fighter', 7),
-                    new FarmUnit(`Hound's Tooth`, 7),
-                    new FarmUnit(`Kylo Ren's Command Shuttle`, 7),
-                    new FarmUnit('Slave I', 7),
-                    new FarmUnit('TIE Silencer', 7),
-                    new FarmUnit('TIE Advanced x1', 7),
-                    new FarmUnit('Xanadu Blood', 7),
-                    new FarmUnit('Executrix', 7),
-                    new FarmUnit('Home One', 7),
-                    new FarmUnit('Endurance', 7),],
+                        new FarmUnit(`Hound's Tooth`, 7),
+                        new FarmUnit(`Kylo Ren's Command Shuttle`, 7),
+                        new FarmUnit('Slave I', 7),
+                        new FarmUnit('TIE Silencer', 7),
+                        new FarmUnit('TIE Advanced x1', 7),
+                        new FarmUnit('Xanadu Blood', 7),
+                        new FarmUnit('Executrix', 7),
+                        new FarmUnit('Home One', 7),
+                        new FarmUnit('Endurance', 7),],
                 ),
-                new Farm( 
+                new Farm(
                     'Raddus',
                     'event',
                     'light',
                     [],
                     [
-                        new FarmUnit(`Rey's Millennium Falcon`, 7), 
+                        new FarmUnit(`Rey's Millennium Falcon`, 7),
                         new FarmUnit(`Resistance X-wing`, 7),
                         new FarmUnit(`Poe Dameron's X-wing`, 7),
                         new FarmUnit(`Hound's Tooth`, 7),
@@ -113,8 +113,8 @@ export class Eventslow {
                 ),
             ]
         )
-        
-        
-            return this.pkfarm;
-        }
+
+
+        return this.pkfarm;
+    }
 }

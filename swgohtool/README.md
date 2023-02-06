@@ -24,6 +24,7 @@ v1.3
     Message if no user is selected
     Added discord join button
     Added github links
+    Bugfix: wrong margin on bottom
 v1.2
     Bug fix: Loading component not in center
     Bug fix: When pressing enter the function gets the first of the feddy list
