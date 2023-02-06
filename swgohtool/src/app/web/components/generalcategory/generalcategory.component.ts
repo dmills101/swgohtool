@@ -10,8 +10,7 @@ import { Observable } from 'rxjs';
 export class GeneralcategoryComponent {
   loaded$:Observable<any>= this.fetch.loaded;
   @Input() list:Observable<any> | undefined  ;
-  //legends$:Observable<any>= this.fetch.legends;
-
+ 
    public constructor(private fetch:FetchmeService,
     ){
    

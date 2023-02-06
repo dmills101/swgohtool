@@ -14,8 +14,13 @@ import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  //Variables
   title = 'swgohtool';
+  urlparams:any;
+  ally_code:any;
+  loading = false;
 
+  //Subscriptions
   ships$:Observable<any> = this.fetch.ships;
   units$:Observable<any> = this.fetch.units;
   playerdata$:Observable<any>= this.fetch.playerdata;
@@ -32,52 +37,52 @@ export class AppComponent {
   cpit$:Observable<any>= this.fetch.cpit;
   cpitlw$:Observable<any>= this.fetch.cpitlw;
 
-urlparams:any;
-ally_code:any;
-
+  //Form
   checkoutForm:FormGroup = this.formBuilder.group({
     playerid: ''//'142367359','357182769'
   });
 
-  loading = false;
+  //Subs
+  _sub_router:any;
 
+  public constructor(
+    private fetch: FetchmeService,
+    private formBuilder: FormBuilder, 
+    private route: ActivatedRoute, 
+    private router: Router) {
 
-  async ngOnInit(){
-   // this.playerdata$ 
-//this.loaded$ = this.fetch.loaded;
-this.route.queryParams
-.subscribe(async params => {
-  this.urlparams=params;
-  //console.log(params); // { orderby: "price" }
-  if(params['playerid']){
-    //if(!this.loading){ 
+  }
+
+  //Initialisation
+  async ngOnInit() {
+    this._sub_router = this.route.queryParams.subscribe(async params => {
+      this.urlparams = params;
+      if (params['playerid']) {
+        this.loading = true;
+        console.log(`Populating2: ${params['playerid']} != ${this.checkoutForm.controls['playerid'].value}`)
+        this.checkoutForm.patchValue({ playerid: params['playerid'] });
+        this.ally_code = params['playerid'];
+        await this.fetch.populatePlayer(this.checkoutForm.controls['playerid'].value);
+        this.loading = false;
+      }
+    });
+
+    //Populate vars that have nothing to do with player
     this.loading = true;
-    //console.log(`${params['playerid']} != ${this.checkoutForm.controls['playerid'].value}`);
-    console.log(`Populating2: ${params['playerid']} != ${this.checkoutForm.controls['playerid'].value}`)
-    this.checkoutForm.patchValue({playerid:params['playerid']});
-    this.ally_code = params['playerid'];
-  await this.fetch.populatePlayer(this.checkoutForm.controls['playerid'].value);
-  this.loading = false;
-    //}
+    await this.fetch.populateGuild();
+    await this.fetch.populateShips();
+    await this.fetch.populateUnits();
+    this.loading = false;
   }
 
-}
-);
-this.loading = true;
-
-await this.fetch.populateGuild();
-await this.fetch.populateShips();
-await this.fetch.populateUnits();
-this.loading = false;
-}
-
-  public constructor(private fetch:FetchmeService,
-    private formBuilder: FormBuilder,private route: ActivatedRoute,private router: Router){
-    //console.log("add me");
- 
+  //Remove subs on destroy
+  ngOnDestroy(){
+    if(this._sub_router){
+      this._sub_router.unsubscribe();
+    }
   }
 
-  //@HostListener('document:keypress', ['$event'])
+  //Listen for keydown events. Especially on enter
   @HostListener('keydown', ['$event'])
   async fetchData1($event:KeyboardEvent){
     if ($event.key == "Enter" ){
@@ -85,40 +90,31 @@ this.loading = false;
     }
   }
 
-  async fetchData(){
-    //await this.fetch.populateShips();
-    //await this.fetch.populateUnits();
-    //let player = await this.fetch.populatePlayer('357182769');    
-    //console.log(`${this.urlparams['playerid']} != ${this.checkoutForm.controls['playerid'].value}`);
-    if(this.urlparams['playerid'] != this.checkoutForm.controls['playerid'].value){
+  //Populate the player
+  async fetchData() {
+    if (this.urlparams['playerid'] != this.checkoutForm.controls['playerid'].value) {
       this.loading = true;
-      this.checkoutForm.patchValue({playerid:this.checkoutForm.controls['playerid'].value});
+      this.checkoutForm.patchValue({ playerid: this.checkoutForm.controls['playerid'].value });
       let lnk = `/?playerid=${this.checkoutForm.controls['playerid'].value}`;
-      console.log(`Populating1: ${lnk}`)
       this.router.navigateByUrl(lnk);
-    }else{
-      console.log(`Populating0: ${this.checkoutForm.controls['playerid'].value}`)
+    } else {
       this.loading = true;
       let player = await this.fetch.populatePlayer(this.checkoutForm.controls['playerid'].value);
       this.loading = false;
     }
-    //console.log(player);
   }
 
+  //Prevent form submission
   handleSubmit(e:any){
     e.preventDefault();
-    //alert('this.msg');
   }
 
+  //Change player from the dropdown
   async changeplayer(lnd:any){
     let lnk = `/?playerid=${lnd.ally_code}`;
-    console.log(`Populating3: ${lnk}`)
     this.router.navigateByUrl(lnk);
 
   }
 
-  test(){
-    //console.log(this.fetch.units);
-    //console.log(this.fetch.ships);
-  }
+  
 }
