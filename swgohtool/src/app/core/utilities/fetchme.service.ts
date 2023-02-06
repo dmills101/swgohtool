@@ -35,7 +35,9 @@ export class FetchmeService {
 
   private _playerdata = new BehaviorSubject<any>([]);
   playerdata = this._playerdata.asObservable();
+  _playerobj:any;
   changePlayerData(newData:any){
+    this._playerobj  = newData;
     this._playerdata.next(newData);
   }
 
@@ -43,6 +45,12 @@ export class FetchmeService {
   loaded = this._loaded.asObservable();
   changeLoaded(newData:any){
     this._loaded.next(newData);
+  }
+
+  private _error = new BehaviorSubject<any>(null);
+  error = this._error.asObservable();
+  changeError(newData:any){
+    this._error.next(newData);
   }
 
   private _legends = new BehaviorSubject<any>([]);
@@ -173,276 +181,167 @@ members.
   ally_code
   galactic_power
 */
-    //console.log(data);
-    let ddt = guild.data.members.sort(this.objectComparisonCallback);
+     let ddt = guild.data.members.sort(this.objectComparisonCallback);
     this.changeGuild(ddt);
    }
 
-   async populatePlayer(pid:string){
-     if(!pid){
-      return;
-    }
-    this.changeLoaded(false);
-    if(!this.shipsobj){
-      await this.populateShips();
-    }
-    if(!this.unitsobj){
-      await this.populateUnits();
-    }
+  //Populate player from given id
+  async populatePlayer(pid: string) {
+    try {
+      if (!pid) {
+        return;
+      }
+      this.changeError(null);
+      this.changeLoaded(false);
+      if (!this.shipsobj) {
+        await this.populateShips();
+      }
+      if (!this.unitsobj) {
+        await this.populateUnits();
+      }
 
       let data = await this.getDataForPlayer(pid);
-      
-      //console.log(data);
+
       let jsonstr = JSON.stringify(data);
       let player = JSON.parse(jsonstr);
-     // let dv = player.units.find((x: { data: any; })=>x.data.name == 'Darth Vader');
-     // let dv1 = player.units.find((x: { data: any; })=>x.data.name == 'Kylo Ren (Unmasked)');
-     // let dv2 = player.units.find((x: { data: any; })=>x.data.name == 'Supreme Leader Kylo Ren');
-     let gls_with_ultimate = player.units.filter((x: { data: any; })=>x.data.is_galactic_legend);
-      //let gls_without_ultimate = player.units.filter((x: { data: any; })=>x.data.is_galactic_legend && !x.data.has_ultimate);
+      let gls_with_ultimate = player.units.filter((x: { data: any; }) => x.data.is_galactic_legend);
 
-    this.changeGls(gls_with_ultimate);
+      this.changeGls(gls_with_ultimate);
 
-    let cats = new categories();
-    cats.renew();
-    cats.player = player.data;
-    this.Loop(cats.legends,player,true,gls_with_ultimate);
-    /*for (let i = 0; i <= cats.legends.farms.length - 1; i++) {
-       let frm = cats.legends.farms[i];
-       try{
-        frm.image = this.unitsobj.find((x: { name: any; })=>x.name == frm.name).image;
-        }catch(e){
-          frm.image = this.shipsobj.find((x: { name: any; })=>x.name == frm.name).image;
-       
-        }
-        frm.ok = gls_with_ultimate.find((x: { data: { name: string; }; })=>x.data.name == frm.name);
-        frm.ultimate = gls_with_ultimate.find((x: { data: any; })=>x.data.name == frm.name && x.data.has_ultimate) != null;
-       for (let j = 0; j <= frm.units.length - 1; j++) {
-         let unt = frm.units[j];
-         let itm = player.units.find((x: { data: any; }) => x.data.name == unt.name);
-         let itm_all = null;
-         try{
-          itm_all = this.unitsobj.find((x: { name: any; })=>x.name == itm.data.name);
-        }catch(e){
-          itm_all = this.unitsobj.find((x: { name: any; })=>x.name == unt.name);
+      let cats = new categories();
+      cats.renew();
+      cats.player = player.data;
+      this.Loop(cats.legends, player, true, gls_with_ultimate);
 
-        }
-        unt.setPlayerItem(itm,itm_all);
-       }
-       for (let j = 0; j <= frm.ships.length - 1; j++) {
-        //frm.image = this.unitsobj.find((x: { name: any; })=>x.name == frm.name).image;
-        let unt = frm.ships[j];
-        let itm = player.units.find((x: { data: any; }) => x.data.name == unt.name);
-        let itm_all = null;
-        try{
-         itm_all = this.shipsobj.find((x: { name: any; })=>x.name == itm.data.name);
-       }catch(e){
-        itm_all = this.shipsobj.find((x: { name: any; })=>x.name == unt.name);
+
+      this.Loop(cats.events, player);
+
+
+      this.Loop(cats.eventslow, player);
+      this.Loop(cats.goodteams, player);
+
+      this.Loop(cats.cpit, player);
+      this.changeCpit(cats.cpit.farms);
+      let cpitlw = cats.cpit.farms.filter(x => x.ok);
+      this.changeCpitLW(cpitlw);
+
+
+      let events = cats.events.farms.filter(x => x.ok);
+      this.changeEvnts(events);
+      this.changeEventsLow(cats.eventslow.farms);
+      let eventslw = cats.eventslow.farms.filter(x => x.ok);
+      this.changeEvntsLW(eventslw);
+
+      this.changeGoodTeams(cats.goodteams.farms);
+      let gtlw = cats.goodteams.farms.filter(x => x.ok);
+      this.changeGoodTeamsLW(gtlw);
+
+      try {
+        var d1 = new Date(cats.player.last_updated);
+        var d2 = new Date();
+        cats.player.last_update_sub = (Math.abs(d2.getTime() - d1.getTime()) / 3600000).toFixed(0);
+      } catch (e) {
+        console.error(e);
       }
-       unt.setPlayerItem(itm,itm_all);
-         
-      }
-     }*/
-
-     this.Loop(cats.events,player);
-    /* for (let i = 0; i <= cats.events.farms.length - 1; i++) {
-      let frm = cats.events.farms[i];
-      try{
-      frm.image = this.unitsobj.find((x: { name: any; })=>x.name == frm.name).image;
-      }catch(e){
-        frm.image = this.shipsobj.find((x: { name: any; })=>x.name == frm.name).image;
-     
-      }        
-      frm.ok = player.units.find((x: { data: { name: string; }; })=>x.data.name == frm.name) != null;
-      frm.ultimate = true;
-
-      for (let j = 0; j <= frm.units.length - 1; j++) {
-        let unt = frm.units[j];
-        let itm = player.units.find((x: { data: any; }) => x.data.name == unt.name);
-        let itm_all = null;
-        try{
-         itm_all = this.unitsobj.find((x: { name: any; })=>x.name == itm.data.name);
-       }catch(e){
-        itm_all = this.unitsobj.find((x: { name: any; })=>x.name == unt.name);
-      }
-       unt.setPlayerItem(itm,itm_all);
-       
-      }
-      for (let j = 0; j <= frm.ships.length - 1; j++) {
-       let unt = frm.ships[j];
-       let itm = player.units.find((x: { data: any; }) => x.data.name == unt.name);
-       let itm_all = null;
-       try{
-        itm_all = this.shipsobj.find((x: { name: any; })=>x.name == itm.data.name);
-      }catch(e){
-        itm_all = this.shipsobj.find((x: { name: any; })=>x.name == unt.name);
-      }
-     unt.setPlayerItem(itm,itm_all);
-        
-     }
-    }*/
-
-    this.Loop(cats.eventslow,player);
-    this.Loop(cats.goodteams,player);
-   /* for (let i = 0; i <= cats.eventslow.farms.length - 1; i++) {
-      let frm = cats.eventslow.farms[i];
-      try{
-      frm.image = this.unitsobj.find((x: { name: any; })=>x.name == frm.name).image;
-      }catch(e){
-        frm.image = this.shipsobj.find((x: { name: any; })=>x.name == frm.name).image;
-     
-      }        
-      frm.ok = player.units.find((x: { data: { name: string; }; })=>x.data.name == frm.name) != null;
-      let found = player.units.find((x: { data: { name: string; }; })=>x.data.name == frm.name);
-      if(found){
-         // console.log(found);
-          frm.setFound(found);
-          if(found.data.rarity==7){
-            frm.ok= true;
-          }else{
-            frm.ok = false;
-          }
-          //frm.ok = true;
-      }else{
-        frm.ok= false;
-      }
-      frm.ultimate = true;
-
-      for (let j = 0; j <= frm.units.length - 1; j++) {
-        let unt = frm.units[j];
-        let itm = player.units.find((x: { data: any; }) => x.data.name == unt.name);
-        let itm_all = null;
-        try{
-         itm_all = this.unitsobj.find((x: { name: any; })=>x.name == itm.data.name);
-       }catch(e){
-        itm_all = this.unitsobj.find((x: { name: any; })=>x.name == unt.name);
-      }
-       unt.setPlayerItem(itm,itm_all);
-       
-      }
-      for (let j = 0; j <= frm.ships.length - 1; j++) {
-       let unt = frm.ships[j];
-       let itm = player.units.find((x: { data: any; }) => x.data.name == unt.name);
-       let itm_all = null;
-       try{
-        itm_all = this.shipsobj.find((x: { name: any; })=>x.name == itm.data.name);
-      }catch(e){
-        itm_all = this.shipsobj.find((x: { name: any; })=>x.name == unt.name);
-      }
-     unt.setPlayerItem(itm,itm_all);
-        
-     }
-    }*/
-    this.Loop(cats.cpit,player);
-    this.changeCpit(cats.cpit.farms);
-    let cpitlw = cats.cpit.farms.filter(x=> x.ok);
-    this.changeCpitLW(cpitlw);
-
-
-    let events = cats.events.farms.filter(x=> x.ok);
-    this.changeEvnts(events);
-    this.changeEventsLow(cats.eventslow.farms);
-    let eventslw = cats.eventslow.farms.filter(x=> x.ok);
-    this.changeEvntsLW(eventslw);
-
-    this.changeGoodTeams(cats.goodteams.farms);
-    let gtlw = cats.goodteams.farms.filter(x=> x.ok);
-    this.changeGoodTeamsLW(gtlw);
-
-    try{
-    var d1 = new Date(cats.player.last_updated);
-var d2 = new Date();
-    cats.player.last_update_sub = (Math.abs(d2.getTime() - d1.getTime()) / 3600000).toFixed(0);
-    }catch(e){
+      this.changePlayerData(cats.player);
+      this.changeEvents(cats.events.farms);
+      this.changeLegends(cats.legends.farms);
+      this.changeLoaded(true);
+      return cats;
+    } catch (e) {
+      this.changeLoaded(true);
       console.error(e);
+      this.changeError(e);
+      return null;
     }
-     this.changePlayerData(cats.player);
-    this.changeEvents(cats.events.farms);
-    this.changeLegends(cats.legends.farms);
-    this.changeLoaded(true);
-   return cats;
+  }
 
-   }
+  //Main loop of the farms function. This is the core of the code
+  private Loop(eventslow: any, player: any, utl: boolean = false, gllist: any = null) {
+    //Loop all farms from the specified list
+    for (let i = 0; i <= eventslow.farms.length - 1; i++) {
+      let frm = eventslow.farms[i];
+      //Try and get the image
+      try {
+        frm.image = this.unitsobj.find((x: { name: any; }) => x.name == frm.name).image;
+      } catch (e) {
+        frm.image = this.shipsobj.find((x: { name: any; }) => x.name == frm.name).image;
+      }
 
-private Loop(eventslow:any, player:any, utl:boolean=false, gllist:any = null){
-  for (let i = 0; i <= eventslow.farms.length - 1; i++) {
-    let frm = eventslow.farms[i];
-    try{
-    frm.image = this.unitsobj.find((x: { name: any; })=>x.name == frm.name).image;
-    }catch(e){
-      frm.image = this.shipsobj.find((x: { name: any; })=>x.name == frm.name).image;
-   
-    }        
-    frm.ok = player.units.find((x: { data: { name: string; }; })=>x.data.name == frm.name) != null;
-    let found = player.units.find((x: { data: { name: string; }; })=>x.data.name == frm.name);
-    if(found){
-       // console.log(found);
+      //Is ok?
+      frm.ok = player.units.find((x: { data: { name: string; }; }) => x.data.name == frm.name) != null;
+
+      //Fing in the unit lists
+      let found = player.units.find((x: { data: { name: string; }; }) => x.data.name == frm.name);
+      if (found) {
         frm.setFound(found);
-        if(found.data.rarity==7){
-          frm.ok= true;
-        }else{
+        if (found.data.rarity == 7) {
+          frm.ok = true;
+        } else {
           frm.ok = false;
         }
         //frm.ok = true;
-    }else{
-      frm.ok= false;
-    }
-    if(utl && gllist){
-      frm.ultimate = gllist.find((x: { data: any; })=>x.data.name == frm.name && x.data.has_ultimate) != null;
-    }else{
-      frm.ultimate = true;
-    }
+      } else {
+        frm.ok = false;
+      }
 
-    for (let j = 0; j <= frm.units.length - 1; j++) {
-      let unt = frm.units[j];
-      let itm = player.units.find((x: { data: any; }) => x.data.name == unt.name);
-      let itm_all = null;
-      try{
-       itm_all = this.unitsobj.find((x: { name: any; })=>x.name == itm.data.name);
-     }catch(e){
-      itm_all = this.unitsobj.find((x: { name: any; })=>x.name == unt.name);
+
+      if (utl && gllist) {
+        //if check ultimate and gllist for the player is defined
+        frm.ultimate = gllist.find((x: { data: any; }) => x.data.name == frm.name && x.data.has_ultimate) != null;
+      } else {
+        frm.ultimate = true;
+      }
+
+      //Check units
+      for (let j = 0; j <= frm.units.length - 1; j++) {
+        let unt = frm.units[j];
+        let itm = player.units.find((x: { data: any; }) => x.data.name == unt.name);
+        let itm_all = null;
+        try {
+          itm_all = this.unitsobj.find((x: { name: any; }) => x.name == itm.data.name);
+        } catch (e) {
+          itm_all = this.unitsobj.find((x: { name: any; }) => x.name == unt.name);
+        }
+        unt.setPlayerItem(itm, itm_all);
+      }
+
+      //Check ships
+      for (let j = 0; j <= frm.ships.length - 1; j++) {
+        let unt = frm.ships[j];
+        let itm = player.units.find((x: { data: any; }) => x.data.name == unt.name);
+        let itm_all = null;
+        try {
+          itm_all = this.shipsobj.find((x: { name: any; }) => x.name == itm.data.name);
+        } catch (e) {
+          itm_all = this.shipsobj.find((x: { name: any; }) => x.name == unt.name);
+        }
+        unt.setPlayerItem(itm, itm_all);
+      }
     }
-     unt.setPlayerItem(itm,itm_all);
-     
-    }
-    for (let j = 0; j <= frm.ships.length - 1; j++) {
-     let unt = frm.ships[j];
-     let itm = player.units.find((x: { data: any; }) => x.data.name == unt.name);
-     let itm_all = null;
-     try{
-      itm_all = this.shipsobj.find((x: { name: any; })=>x.name == itm.data.name);
-    }catch(e){
-      itm_all = this.shipsobj.find((x: { name: any; })=>x.name == unt.name);
-    }
-   unt.setPlayerItem(itm,itm_all);
-      
-   }
   }
 
-}
-
-
-   async getDataFor(option:string){
+  //Fetch data for ships and units
+  async getDataFor(option: string) {
     const url__in = `${this.proxy_cors}http://api.swgoh.gg/${option}/`;
-    const headers= new HttpHeaders()
-  .set('content-type', 'application/json')
-  .set('Access-Control-Allow-Origin', '*');
-    return this.http.get(url__in, {headers:headers}).toPromise();
-     
-   }
+    const headers = new HttpHeaders()
+      .set('content-type', 'application/json')
+      .set('Access-Control-Allow-Origin', '*');
+    return this.http.get(url__in, { headers: headers }).toPromise();
+  }
 
-   async populateShips(){
+  //Populate ships
+  async populateShips() {
     let data = await this.getDataFor('ships');
-    //console.log(data);
     this.changeShips(data);
     return data;
-   }
+  }
 
-   async populateUnits(){
+  //Populate units
+  async populateUnits() {
     let data = await this.getDataFor('characters');
-    //console.log(data);
     this.changeUnits(data);
     return data;
+  }
 
-   }
 }

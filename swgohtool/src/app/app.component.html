@@ -75,7 +75,8 @@
     <span class="mb-3 mb-md-0 text-muted">Join Feddy on discord<a class="btn btn-primary btn-sm px-2 mx-2" href="https://discord.gg/tErqHJYAxH" target="_blank">Discord</a></span>
   </div>
 </div>
-<div class="accordion" id="accordionPanelsStayOpenExample" *ngIf="loaded$ | async " >
+
+<div class="accordion" id="accordionPanelsStayOpenExample" *ngIf="(loaded$ | async) && !(error$ | async)" >
 
   <div class="accordion-item bg-dark">
     <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
@@ -145,6 +146,11 @@
   </div>
 </div>
 
+<div class="container-fluid  w-100 d-block bg-dark text-white text-center py-4" *ngIf="(loaded$ | async) && (error$ | async)">
+  <h5 class="text-danger">An error has occured.</h5>
+   <p> Please check your internet connection and the provided ally code.</p>
+   <p>Error: {{(error$ | async)}}</p>
+</div>
  
 
   <!-- Footer -->

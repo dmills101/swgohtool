@@ -23,7 +23,12 @@ describe('FetchmeService', () => {
   it('should fetch the guild', async () => {
     await service.populateGuild();
     expect(service._guildobj).not.toBeNull();
-    //console.log(service._guildobj);
     expect(service._guildobj.length).toBeGreaterThan(0);
+  });
+
+  it('should fetch the player', async () => {
+    await service.populatePlayer("357182769");
+    expect(service._playerobj).not.toBeNull();
+    expect(service._playerobj.ally_code.toString()).toEqual("357182769");
   });
 });
