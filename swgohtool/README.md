@@ -17,6 +17,13 @@ cpit
 https://imgur.com/a/iGZObX5
 
 //Release notes
+v1.3
+    Do not reload ship and units if already loaded
+    If the ally_code is in the list of feddy then show it as active
+    Minimised response time per player (66% faster loading time)
+    Message if no user is selected
+    Added discord join button
+    Added github links
 v1.2
     Bug fix: Loading component not in center
     Bug fix: When pressing enter the function gets the first of the feddy list

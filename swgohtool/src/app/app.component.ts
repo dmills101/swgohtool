@@ -33,12 +33,14 @@ export class AppComponent {
   cpitlw$:Observable<any>= this.fetch.cpitlw;
 
 urlparams:any;
-  
+ally_code:any;
+
   checkoutForm:FormGroup = this.formBuilder.group({
     playerid: ''//'142367359','357182769'
   });
 
   loading = false;
+
 
   async ngOnInit(){
    // this.playerdata$ 
@@ -53,6 +55,7 @@ this.route.queryParams
     //console.log(`${params['playerid']} != ${this.checkoutForm.controls['playerid'].value}`);
     console.log(`Populating2: ${params['playerid']} != ${this.checkoutForm.controls['playerid'].value}`)
     this.checkoutForm.patchValue({playerid:params['playerid']});
+    this.ally_code = params['playerid'];
   await this.fetch.populatePlayer(this.checkoutForm.controls['playerid'].value);
   this.loading = false;
     //}
@@ -60,8 +63,12 @@ this.route.queryParams
 
 }
 );
+this.loading = true;
 
 await this.fetch.populateGuild();
+await this.fetch.populateShips();
+await this.fetch.populateUnits();
+this.loading = false;
 }
 
   public constructor(private fetch:FetchmeService,

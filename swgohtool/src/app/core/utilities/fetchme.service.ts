@@ -181,9 +181,13 @@ members.
       return;
     }
     this.changeLoaded(false);
-    await this.populateShips();
-    await this.populateUnits();
-    
+    if(!this.shipsobj){
+      await this.populateShips();
+    }
+    if(!this.unitsobj){
+      await this.populateUnits();
+    }
+
       let data = await this.getDataForPlayer(pid);
       
       //console.log(data);
