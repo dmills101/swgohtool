@@ -6,5 +6,9 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./sw-card.component.scss']
 })
 export class SwCardComponent {
-@Input() lnd:any;
+@Input() lnd:any = undefined;
+
+public constructor(){
+
+}
 }

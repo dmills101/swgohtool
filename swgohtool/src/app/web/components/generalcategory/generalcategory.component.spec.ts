@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GeneralcategoryComponent } from './generalcategory.component';
@@ -8,7 +9,11 @@ describe('GeneralcategoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GeneralcategoryComponent ]
+      imports: [
+         
+        HttpClientModule
+
+      ], declarations: [ GeneralcategoryComponent ]
     })
     .compileComponents();
 

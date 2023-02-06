@@ -83,7 +83,9 @@ export class FetchmeService {
   
   private _guild = new BehaviorSubject<any>([]);
   guild = this._guild.asObservable();
+  _guildobj :any;
   changeGuild(newData:any){
+    this._guildobj = newData;
     this._guild.next(newData);
   }
 
