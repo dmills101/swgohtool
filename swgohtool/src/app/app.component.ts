@@ -36,6 +36,7 @@ export class AppComponent {
   goodteamslw$:Observable<any>= this.fetch.goodteamslw;
   cpit$:Observable<any>= this.fetch.cpit;
   cpitlw$:Observable<any>= this.fetch.cpitlw;
+  error$:Observable<any>= this.fetch.error;
 
   //Form
   checkoutForm:FormGroup = this.formBuilder.group({
@@ -59,7 +60,6 @@ export class AppComponent {
       this.urlparams = params;
       if (params['playerid']) {
         this.loading = true;
-        console.log(`Populating2: ${params['playerid']} != ${this.checkoutForm.controls['playerid'].value}`)
         this.checkoutForm.patchValue({ playerid: params['playerid'] });
         this.ally_code = params['playerid'];
         await this.fetch.populatePlayer(this.checkoutForm.controls['playerid'].value);

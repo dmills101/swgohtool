@@ -11,6 +11,7 @@ export class PlayerinfoComponent {
   loaded$:Observable<any>= this.fetch.loaded;
   playerdata$:Observable<any>= this.fetch.playerdata;
   gls$:Observable<any>= this.fetch.gls;
+  error$:Observable<any>= this.fetch.error;
 
   public constructor(private fetch:FetchmeService,
      ){
