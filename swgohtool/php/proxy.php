@@ -62,7 +62,17 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Access-Control-Allow-Headers: *");
 $string = file_get_contents($url);
 
+$count_page = ("hitcount.txt");
+$hits = file($count_page);
+$hits[0] ++;
+ 
+$fp = fopen($count_page , "w");
+fputs($fp , "$hits[0]");
+fclose($fp);
+
 //$txt = "user id date";
-//$myfile = file_put_contents('logs.txt', $origin.PHP_EOL , FILE_APPEND | LOCK_EX);
+$date = date("Y-m-d G:i", time());
+$testdata = $date.":".$origin."-".$url.PHP_EOL;
+$myfile = file_put_contents('logs.txt', $testdata , FILE_APPEND | LOCK_EX);
 //$myfile = file_put_contents('logs.txt', $url.PHP_EOL , FILE_APPEND | LOCK_EX);
 echo $string;
