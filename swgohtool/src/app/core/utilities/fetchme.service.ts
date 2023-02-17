@@ -309,7 +309,7 @@ members.
   private Loop(eventslow: any, player: any, utl: boolean = false, gllist: any = null) {
     //Loop all farms from the specified list
     for (let i = 0; i <= eventslow.farms.length - 1; i++) {
-      let frm = eventslow.farms[i];
+      let frm:Farm = eventslow.farms[i];
       //Try and get the image
       try {
         frm.image = this.unitsobj.find((x: { name: any; }) => x.name == frm.name).image;
@@ -331,12 +331,17 @@ members.
         }
         //frm.ok = true;
       } else {
+        let fnd =  this.unitsobj.find((x: { name: any; }) => x.name == frm.name);
+        if(!fnd){
+          fnd =  this.shipsobj.find((x: { name: any; }) => x.name == frm.name);
+        }
+        frm.setFound2(fnd);
         frm.ok = false;
       }
 
 
       if (utl && gllist) {
-        //if check ultimate and gllist for the player is defined
+        //if check ultimate and gllist for the player is defined 
         frm.ultimate = gllist.find((x: { data: any; }) => x.data.name == frm.name && x.data.has_ultimate) != null;
       } else {
         frm.ultimate = true;
@@ -511,4 +516,6 @@ members.
     }
   }
 
+
+   
 }

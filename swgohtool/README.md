@@ -17,6 +17,9 @@ cpit
 https://imgur.com/a/iGZObX5
 
 //Release notes
+v1.4
+    Bugfix: welcome image over small devices
+    Added links to each toon. If the player has the toon then link to players toon. If not the link to general swgoh toon
 v1.3
     Do not reload ship and units if already loaded
     If the ally_code is in the list of feddy then show it as active
