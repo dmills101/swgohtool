@@ -4,6 +4,8 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
 import { categories } from '../data/cats';
+import { Cpit } from '../data/cpit';
+import { Farm, FarmUnit } from '../classes/cls-frm';
 //import legends from '../../core/data/gls'; 
 //import  categories from '../../core/data/cats'; 
 
@@ -119,6 +121,30 @@ export class FetchmeService {
     this._cpitlw.next(newData);
   }
 
+  private _cpitready = new BehaviorSubject<any>([]);
+  cpitready = this._cpitready.asObservable();
+  changeCpitReady(newData:any){
+    this._cpitready.next(newData);
+  }
+
+  private _cpitready_counter = new BehaviorSubject<any>([]);
+  cpitready_counter = this._cpitready_counter.asObservable();
+  changeCpitReadyCounter(newData:any){
+    this._cpitready_counter.next(newData);
+  }
+  
+  private _cpitreadyclose = new BehaviorSubject<any>([]);
+  cpitreadyclose = this._cpitreadyclose.asObservable();
+  changeCpitReadyClose(newData:any){
+    this._cpitreadyclose.next(newData);
+  }
+
+  private _cpitready_counterclose = new BehaviorSubject<any>([]);
+  cpitready_counterclose = this._cpitready_counterclose.asObservable();
+  changeCpitReadyCounterClose(newData:any){
+    this._cpitready_counterclose.next(newData);
+  }
+  
   constructor(private http: HttpClient) { 
 
     this.changeLoaded(false);
@@ -171,6 +197,19 @@ export class FetchmeService {
     return 0
   }
 
+
+  objectComparisonCallback_Power = (arrayItemA:any, arrayItemB:any) => {
+    if (arrayItemA.data.power < arrayItemB.data.power) {
+      return 1
+    }
+  
+    if (arrayItemA.data.power > arrayItemB.data.power) {
+      return -1
+    }
+  
+    return 0
+  }
+
    async populateGuild(){
     let data = await this.getDataForGuild();
     let jsonstr = JSON.stringify(data);
@@ -206,10 +245,16 @@ members.
       let player = JSON.parse(jsonstr);
       let gls_with_ultimate = player.units.filter((x: { data: any; }) => x.data.is_galactic_legend);
 
+     
+
       this.changeGls(gls_with_ultimate);
 
       let cats = new categories();
       cats.renew();
+      
+      this.populateCpitReady(player);
+      this.populateCpitReadyClose(player);
+
       cats.player = player.data;
       this.Loop(cats.legends, player, true, gls_with_ultimate);
 
@@ -246,6 +291,10 @@ members.
       this.changePlayerData(cats.player);
       this.changeEvents(cats.events.farms);
       this.changeLegends(cats.legends.farms);
+      
+    
+       
+
       this.changeLoaded(true);
       return cats;
     } catch (e) {
@@ -260,7 +309,7 @@ members.
   private Loop(eventslow: any, player: any, utl: boolean = false, gllist: any = null) {
     //Loop all farms from the specified list
     for (let i = 0; i <= eventslow.farms.length - 1; i++) {
-      let frm = eventslow.farms[i];
+      let frm:Farm = eventslow.farms[i];
       //Try and get the image
       try {
         frm.image = this.unitsobj.find((x: { name: any; }) => x.name == frm.name).image;
@@ -282,12 +331,17 @@ members.
         }
         //frm.ok = true;
       } else {
+        let fnd =  this.unitsobj.find((x: { name: any; }) => x.name == frm.name);
+        if(!fnd){
+          fnd =  this.shipsobj.find((x: { name: any; }) => x.name == frm.name);
+        }
+        frm.setFound2(fnd);
         frm.ok = false;
       }
 
 
       if (utl && gllist) {
-        //if check ultimate and gllist for the player is defined
+        //if check ultimate and gllist for the player is defined 
         frm.ultimate = gllist.find((x: { data: any; }) => x.data.name == frm.name && x.data.has_ultimate) != null;
       } else {
         frm.ultimate = true;
@@ -344,4 +398,124 @@ members.
     return data;
   }
 
+  populateCpitReady(player:any){
+    try {
+      let relicunits_cpitready = player.units.filter((x: { data: any; }) => (x.data.relic_tier-2) >= 5);
+      let relicunits_cpitready_sorted = relicunits_cpitready.sort(this.objectComparisonCallback_Power);
+      let indx = 1;
+      let frm_list: Farm[] = [];
+      this.changeCpitReady(frm_list);
+      this.changeCpitReadyCounter(0);
+       let frm_cpit = new Farm(
+        `Relic 5 toons (${indx})`,
+        'list',
+        'all',
+        [],
+        [],
+        ''
+      );
+      frm_cpit.ok = true;
+      frm_cpit.ultimate=true;
+      frm_cpit.units = [];
+      for (let i = 0; i <= relicunits_cpitready_sorted.length - 1; i++) {
+        let itm = relicunits_cpitready_sorted[i];
+        let frm_unit = new FarmUnit(itm.data.name, 7, 13, 5);
+        let itm_all = null;
+        try {
+          itm_all = this.unitsobj.find((x: { name: any; }) => x.name == itm.data.name);
+        } catch (e) {
+          itm_all = this.unitsobj.find((x: { name: any; }) => x.name == frm_unit.name);
+        }
+        frm_unit.setPlayerItem(itm, itm_all);
+
+        if(frm_cpit.units.length < 5){
+          frm_cpit.units.push(frm_unit);
+        }else{
+          frm_list.push(frm_cpit);
+          indx++;
+          frm_cpit =  new Farm(
+            `Relic 5 toons (${indx})`,
+            'list',
+            'all',
+            [],
+            [],
+            ''
+          );
+          frm_cpit.ok = true;
+          frm_cpit.ultimate=true;
+          frm_cpit.units.push(frm_unit);
+        }
+      }
+      if(!frm_list.find(x=>x.name == frm_cpit.name)){
+        frm_list.push(frm_cpit);
+
+      }
+      this.changeCpitReady(frm_list);
+      this.changeCpitReadyCounter(relicunits_cpitready_sorted.length);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  populateCpitReadyClose(player:any){
+    try {
+      let relicunits_cpitready = player.units.filter((x: { data: any; }) => (x.data.relic_tier-2) >= 1 && (x.data.relic_tier-2) < 5);
+      let relicunits_cpitready_sorted = relicunits_cpitready.sort(this.objectComparisonCallback_Power);
+      let indx = 1;
+      let frm_list: Farm[] = [];
+      this.changeCpitReadyClose(frm_list);
+      this.changeCpitReadyCounterClose(0);
+       let frm_cpit = new Farm(
+        `Close to Relic 5 toons (${indx})`,
+        'list',
+        'all',
+        [],
+        [],
+        ''
+      );
+      frm_cpit.ok = true;
+      frm_cpit.ultimate=true;
+      frm_cpit.units = [];
+      for (let i = 0; i <= relicunits_cpitready_sorted.length - 1; i++) {
+        let itm = relicunits_cpitready_sorted[i];
+        let frm_unit = new FarmUnit(itm.data.name, 7, 13, 5);
+        let itm_all = null;
+        try {
+          itm_all = this.unitsobj.find((x: { name: any; }) => x.name == itm.data.name);
+        } catch (e) {
+          itm_all = this.unitsobj.find((x: { name: any; }) => x.name == frm_unit.name);
+        }
+        frm_unit.setPlayerItem(itm, itm_all);
+
+        if(frm_cpit.units.length < 5){
+          frm_cpit.units.push(frm_unit);
+        }else{
+          frm_list.push(frm_cpit);
+          indx++;
+          frm_cpit =  new Farm(
+            `Close to Relic 5 toons (${indx})`,
+            'list',
+            'all',
+            [],
+            [],
+            ''
+          );
+          frm_cpit.ok = true;
+          frm_cpit.ultimate=true;
+          frm_cpit.units.push(frm_unit);
+        }
+      }
+      if(!frm_list.find(x=>x.name == frm_cpit.name)){
+        frm_list.push(frm_cpit);
+
+      }
+      this.changeCpitReadyClose(frm_list);
+      this.changeCpitReadyCounterClose(relicunits_cpitready_sorted.length);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+
+   
 }

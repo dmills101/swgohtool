@@ -37,6 +37,10 @@ export class AppComponent {
   cpit$:Observable<any>= this.fetch.cpit;
   cpitlw$:Observable<any>= this.fetch.cpitlw;
   error$:Observable<any>= this.fetch.error;
+  cpitready$:Observable<any>= this.fetch.cpitready;
+  cpitready_counter$:Observable<any>= this.fetch.cpitready_counter;
+  cpitreadyclose$:Observable<any>= this.fetch.cpitreadyclose;
+  cpitready_counterclose$:Observable<any>= this.fetch.cpitready_counterclose;
 
   //Form
   checkoutForm:FormGroup = this.formBuilder.group({

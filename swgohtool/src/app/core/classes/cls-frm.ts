@@ -15,6 +15,7 @@ export class Farm {
   foundText: any = null;
   description: string;
   hasminimumpower: boolean = false;
+  url:any=null;
 
   constructor(name: string, type: string, side: string, units: FarmUnit[], ships: FarmUnit[], desc: any = null, hasminimumpower: boolean = false) {
     this.name = name
@@ -33,6 +34,26 @@ export class Farm {
       this.foundText = `${found.data.rarity}/7`;
     } else {
       this.foundText = null;
+    }
+
+    if(found && found.hasOwnProperty('data') && found.data && found.data.hasOwnProperty('url') && found.data.url){
+      this.url = `https://swgoh.gg${found.data.url}`;
+    }else if(found && found.hasOwnProperty('url') && found.url){
+      this.url = `${found.url}`;
+    } else{
+      this.url=null;
+    }
+  }
+
+  setFound2(found: any) {
+    
+
+    if(found && found.hasOwnProperty('data') && found.data && found.data.hasOwnProperty('url') && found.data.url){
+      this.url = `https://swgoh.gg${found.data.url}`;
+    }else if(found && found.hasOwnProperty('url') && found.url){
+      this.url = `${found.url}`;
+    } else{
+      this.url=null;
     }
   }
 }
@@ -57,6 +78,7 @@ export class FarmUnit {
   power: number = 0;
 
   image: any = null;
+  url:any=null;
 
   constructor(name: string, stars: number, gear_level?: number, relic_level?: number, minimum_power_toon?: number, minimum_power_ship?: number) {
     this.name = name;
@@ -79,6 +101,13 @@ export class FarmUnit {
   setPlayerItem(item: any, item_orig: any) {
     if (item_orig && item_orig.hasOwnProperty('image') && item_orig.image) {
       this.image = item_orig.image;
+    }
+    if(item && item.hasOwnProperty('data') && item.data && item.data.hasOwnProperty('url') && item.data.url){
+      this.url = `https://swgoh.gg${item.data.url}`;
+    }else if(item_orig && item_orig.hasOwnProperty('url') && item_orig.url){
+      this.url = `${item_orig.url}`;
+    }else{
+      this.url=null;
     }
     this.player_itm = item;
     if (item && item.hasOwnProperty('data') && item.data) {

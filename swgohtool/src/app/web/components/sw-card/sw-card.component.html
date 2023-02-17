@@ -7,10 +7,14 @@
         alt="Place image title">
       <div class="my-auto">
         <div class="ps-3" *ngIf="lnd.description">{{lnd.description}}</div>
-        <div class="ps-3 ">{{lnd.name}}
-          <span *ngIf="lnd.ok && lnd.ultimate">&#x2713;</span>
-          <span *ngIf="lnd.foundText">Stars:({{lnd.foundText}})</span>
-
+        <div class="ps-3 "> <!--{{lnd.name}}-->
+          <span class="my-1 " *ngIf="!lnd.url">{{lnd.name}}</span>
+          <span class="my-1 " *ngIf="lnd.url"><a  href="{{lnd.url}}" class="" 
+            [ngClass]="{'text-dark': (lnd.ok && lnd.ultimate) || (lnd.ok && !lnd.ultimate) || (!lnd.ok && lnd.ultimate), 'text-white-bd': !lnd.ok && !lnd.ultimate}"  target="_blank">{{lnd.name}}</a></span>
+             
+            <span class="ps-1" *ngIf="lnd.ok && lnd.ultimate">&#x2713;</span>
+          <span class="ps-1" *ngIf="lnd.foundText">Stars:({{lnd.foundText}})</span>
+ 
         </div>
         <div class="ps-3" *ngIf="lnd.ok && !lnd.ultimate">(No ultimate)</div>
 
@@ -30,12 +34,14 @@
         </thead>
         <tbody>
           <tr *ngFor="let unt of lnd.units; index as i">
+            
             <th class="p-0" [ngClass]="{'bg-success': unt.allOK() && unt.hasTheToon(), 'bg-danger':!unt.hasTheToon()}"
               scope="row"><img style="border:1px solid #00aaff" width="32" height="32" *ngIf="unt.image"
                 [src]="unt.image" alt="Image from swgoh.gg"></th>
             <td class="py-0"
               [ngClass]="{'bg-success': unt.allOK() && unt.hasTheToon(), 'bg-danger':!unt.hasTheToon(), 'bd-yellow-200': unt.hasTheToon() && !unt.allOK()} ">
-              <div class="my-1 ">{{unt.name}}</div>
+              <div class="my-1 " *ngIf="!unt.url">{{unt.name}}</div>
+              <div class="my-1 " *ngIf="unt.url"><a  href="{{unt.url}}" class="" [ngClass]="{'link-secondary text-white-bd': (unt.allOK() && unt.hasTheToon()) || !unt.hasTheToon(), 'text-dark-bd':  unt.hasTheToon() && !unt.allOK()}" target="_blank">{{unt.name}}</a></div>
             </td>
             <td class="py-0"
               [ngClass]="{'bg-success': unt.rarityOK || unt.allOK(), 'bg-danger':!unt.hasTheToon(), 'bd-yellow-200': unt.hasTheToon() && !unt.rarityOK}">
@@ -76,7 +82,8 @@
                 [src]="unt.image" alt="Image from swgoh.gg"></th>
             <td class="py-0"
               [ngClass]="{'bg-success': unt.allOK() && unt.hasTheToon(), 'bg-danger':!unt.hasTheToon(), 'bd-yellow-200': unt.hasTheToon() && !unt.allOK()} ">
-              <div class="my-1 ">{{unt.name}}</div>
+              <div class="my-1 " *ngIf="!unt.url">{{unt.name}}</div>
+              <div class="my-1 " *ngIf="unt.url"><a  href="{{unt.url}}" class="" [ngClass]="{'link-secondary text-white-bd': (unt.allOK() && unt.hasTheToon()) || !unt.hasTheToon(), 'text-dark-bd':  unt.hasTheToon() && !unt.allOK()}" target="_blank">{{unt.name}}</a></div>
             </td>
             <td class="py-0"
               [ngClass]="{'bg-success': unt.rarityOK || unt.allOK(), 'bg-danger':!unt.hasTheToon(), 'bd-yellow-200': unt.hasTheToon() && !unt.rarityOK}">
