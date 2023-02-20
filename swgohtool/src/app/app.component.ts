@@ -47,6 +47,12 @@ export class AppComponent {
     playerid: ''//'142367359','357182769'
   });
 
+  //Form
+  inputForm:FormGroup = this.formBuilder.group({
+    hidecompleted: true
+  });
+
+
   //Subs
   _sub_router:any;
 
@@ -55,7 +61,18 @@ export class AppComponent {
     private formBuilder: FormBuilder, 
     private route: ActivatedRoute, 
     private router: Router) {
-
+      this.inputForm.patchValue({
+        hideCompleted: this.fetch.hidecompletedValue
+        
+      });
+ this.inputForm.valueChanges.subscribe(x=>{
+  this.fetch.changeHideCompleted(x.hidecompleted);
+  this.fetch.changeHideCompletedItems(x.hidecompleted);
+  if(this.checkoutForm.controls['playerid'].value){
+ this.fetchData();
+  }
+ // console.log(x);
+});
   }
 
   //Initialisation

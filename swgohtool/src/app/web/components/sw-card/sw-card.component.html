@@ -1,11 +1,14 @@
 <div class="card my-2" *ngIf="lnd">
-
+  <!--
+  {{lnd.ok}}
+  {{lnd.ultimate}}
+  {{lnd.foundText}}-->
   <div class="card-body w-100 m-0 p-0 bg-dark">
     <h5 class="card-title d-flex mb-0 pb-0"
       [ngClass]="{'bg-success text-white': lnd.ok && lnd.ultimate , 'bg-warning text-white': (lnd.ok && !lnd.ultimate) || (!lnd.ok && lnd.ultimate && lnd.foundText), 'bg-danger text-white': !lnd.ok && !lnd.foundText}">
       <img class=" p-1 m-1" style="border:1px solid #00aaff" width="64" height="64" *ngIf="lnd.image" [src]="lnd.image"
         alt="Place image title">
-      <div class="my-auto">
+      <div class="my-auto" [ngClass]="{'py-2': !lnd.image}">
         <div class="ps-3" *ngIf="lnd.description">{{lnd.description}}</div>
         <div class="ps-3 "> <!--{{lnd.name}}-->
           <span class="my-1 " *ngIf="!lnd.url">{{lnd.name}}</span>
@@ -13,14 +16,14 @@
             [ngClass]="{'text-dark': (lnd.ok && lnd.ultimate) || (lnd.ok && !lnd.ultimate) || (!lnd.ok && lnd.ultimate), 'text-white-bd': !lnd.ok && !lnd.ultimate}"  target="_blank">{{lnd.name}}</a></span>
              
             <span class="ps-1" *ngIf="lnd.ok && lnd.ultimate">&#x2713;</span>
-          <span class="ps-1" *ngIf="lnd.foundText">Stars:({{lnd.foundText}})</span>
+          <span class="ps-1" *ngIf="lnd.foundText">({{lnd.foundText}})</span>
  
         </div>
         <div class="ps-3" *ngIf="lnd.ok && !lnd.ultimate">(No ultimate)</div>
 
       </div>
     </h5>
-    <div class="card-text  " style="overflow-x: auto;">
+    <div class="card-text  " style="overflow-x: auto;" *ngIf="checkCompleted()">
       <table class="table table-dark table-bordered">
         <thead>
           <tr>
@@ -33,8 +36,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let unt of lnd.units; index as i">
-            
+          <tr *ngFor="let unt of lnd.units; index as i" >
+            <ng-container *ngIf="checkCompletedItem(unt)">
             <th class="p-0" [ngClass]="{'bg-success': unt.allOK() && unt.hasTheToon(), 'bg-danger':!unt.hasTheToon()}"
               scope="row"><img style="border:1px solid #00aaff" width="32" height="32" *ngIf="unt.image"
                 [src]="unt.image" alt="Image from swgoh.gg"></th>
@@ -75,9 +78,11 @@
 
               </div>
             </td>
+          </ng-container>
           </tr>
           <tr *ngFor="let unt of lnd.ships; index as i">
-            <th class="p-0" [ngClass]="{'bg-success': unt.allOK() && unt.hasTheToon(), 'bg-danger':!unt.hasTheToon()}"
+            <ng-container *ngIf="checkCompletedItem(unt)">
+              <th class="p-0" [ngClass]="{'bg-success': unt.allOK() && unt.hasTheToon(), 'bg-danger':!unt.hasTheToon()}"
               scope="row"><img style="border:1px solid #00aaff" width="32" height="32" *ngIf="unt.image"
                 [src]="unt.image" alt="Image from swgoh.gg"></th>
             <td class="py-0"
@@ -113,7 +118,8 @@
 
               </div>
             </td>
-          </tr>
+          </ng-container>
+        </tr>
 
         </tbody>
 

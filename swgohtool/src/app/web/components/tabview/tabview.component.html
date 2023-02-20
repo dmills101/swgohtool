@@ -1,0 +1,208 @@
+<div>
+    <!--<div class="text-white">
+    {{tab1_active}}
+    {{tab2_active}}
+    {{tab3_active}}</div>-->
+    <!-- Nav pills -->
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link " [ngClass]="{'active':tab1_active}" data-bs-toggle="pill" href="#roster"
+                (click)="tab1()">
+                <h5>Roster Status</h5>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active':tab3_active}" data-bs-toggle="pill" href="#farm" (click)="tab3()">
+                <h5>Farming list</h5>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active':tab2_active}" data-bs-toggle="pill" href="#cpit" (click)="tab2()">
+                <h5>CPit</h5>
+            </a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane " id="roster" [ngClass]="{'active':tab1_active }">
+            <div class="accordion">
+                <div class="accordion-item bg-dark">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                        <button class="accordion-button bg-dark text-white " type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseTwo">
+                            <h4 class="text-warning  ">Galactic legends ({{(gls$ | async).length}}/{{(legends$ |
+                                async).length}})</h4>
+
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show"
+                        aria-labelledby="panelsStayOpen-headingTwo">
+                        <div class="accordion-body p-0">
+                            <app-generalcategory [list]="legends$"></app-generalcategory>
+                            <!--<app-galacticlegends></app-galacticlegends>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item bg-dark">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                        <button class="accordion-button bg-dark text-white " type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseThree">
+                            <h4 class="text-warning  ">Events ({{(evnts$ | async).length}}/{{(events$ | async).length}})
+                            </h4>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show"
+                        aria-labelledby="panelsStayOpen-headingThree">
+                        <div class="accordion-body p-0">
+                            <app-generalcategory [list]="events$"></app-generalcategory>
+                            <!--<app-events></app-events>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item bg-dark">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingThree1">
+                        <button class="accordion-button bg-dark text-white " type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseThree1" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseThree1">
+                            <h4 class="text-warning  ">Events Low ({{(evntslw$ | async).length}}/{{(eventslow$ |
+                                async).length}})</h4>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseThree1" class="accordion-collapse collapse show"
+                        aria-labelledby="panelsStayOpen-headingThree1">
+                        <div class="accordion-body p-0">
+                            <app-generalcategory [list]="eventslow$"></app-generalcategory>
+                            <!--<app-eventslow></app-eventslow>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item bg-dark">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingZ0">
+                        <button class="accordion-button bg-dark text-white " type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseZ0" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseZ0">
+                            <h4 class="text-warning  ">Good teams</h4>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseZ0" class="accordion-collapse collapse show"
+                        aria-labelledby="panelsStayOpen-headingZ0">
+                        <div class="accordion-body p-0">
+                            <app-generalcategory [list]="goodteams$"></app-generalcategory>
+                            <!-- <app-goodteams></app-goodteams>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane  " id="farm" [ngClass]="{'active':tab3_active }">
+            <div class="accordion">
+                <div class="accordion-item bg-dark">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingZ11">
+                        <button class="accordion-button bg-dark text-white " type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseZ11" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseZ11">
+                            <h4 class="text-warning  ">High priority</h4>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseZ11" class="accordion-collapse collapse show"
+                        aria-labelledby="panelsStayOpen-headingZ11">
+                        <div class="accordion-body p-0">
+                            <app-generalcategory [list]="frmHigh$"></app-generalcategory>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="accordion-item bg-dark">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingZ12">
+                        <button class="accordion-button bg-dark text-white " type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseZ12" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseZ12">
+                            <h4 class="text-warning  ">Medium priority</h4>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseZ12" class="accordion-collapse collapse show"
+                        aria-labelledby="panelsStayOpen-headingZ12">
+                        <div class="accordion-body p-0">
+                            <app-generalcategory [list]="frmMedium$"></app-generalcategory>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item bg-dark">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingZ13">
+                        <button class="accordion-button bg-dark text-white " type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseZ13" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseZ13">
+                            <h4 class="text-warning  ">Low priority</h4>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseZ13" class="accordion-collapse collapse show"
+                        aria-labelledby="panelsStayOpen-headingZ13">
+                        <div class="accordion-body p-0">
+                            <app-generalcategory [list]="frmLow$"></app-generalcategory>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+
+        </div>
+        <div class="tab-pane  " id="cpit" [ngClass]="{'active':tab2_active }">
+            <div class="accordion">
+                <div class="accordion-item bg-dark">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingZ1">
+                        <button class="accordion-button bg-dark text-white " type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseZ1" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseZ1">
+                            <h4 class="text-warning  ">Cpit</h4>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseZ1" class="accordion-collapse collapse show"
+                        aria-labelledby="panelsStayOpen-headingZ1">
+                        <div class="accordion-body p-0">
+                            <app-generalcategory [list]="cpit$"></app-generalcategory>
+                            <!-- <app-cpit></app-cpit>-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item bg-dark">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingZ2">
+                        <button class="accordion-button bg-dark text-white " type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseZ2" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseZ2">
+                            <h4 class="text-warning  ">Cpit ready ({{(cpitready_counter$ | async)}})</h4>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseZ2" class="accordion-collapse collapse show"
+                        aria-labelledby="panelsStayOpen-headingZ2">
+                        <div class="accordion-body p-0">
+                            <app-generalcategory *ngIf="(cpitready_counter$ | async) > 0"
+                                [list]="cpitready$"></app-generalcategory>
+                            <!-- <app-cpit></app-cpit>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item bg-dark">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingZ3">
+                        <button class="accordion-button bg-dark text-white " type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseZ3" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseZ3">
+                            <h4 class="text-warning  ">Cpit ready Close ({{(cpitready_counterclose$ | async)}})</h4>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseZ3" class="accordion-collapse collapse show"
+                        aria-labelledby="panelsStayOpen-headingZ3">
+                        <div class="accordion-body p-0">
+                            <app-generalcategory *ngIf="(cpitready_counterclose$ | async) > 0"
+                                [list]="cpitreadyclose$"></app-generalcategory>
+                            <!-- <app-cpit></app-cpit>-->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

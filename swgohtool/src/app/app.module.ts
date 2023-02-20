@@ -12,6 +12,7 @@ import { LoadingComponent } from './web/components/loading/loading.component';
 import { GeneralcategoryComponent } from './web/components/generalcategory/generalcategory.component';
 import { ImageLogoComponent } from './web/components/image-logo/image-logo.component';
 import { FooterComponent } from './web/main/footer/footer.component';
+import { TabviewComponent } from './web/components/tabview/tabview.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { FooterComponent } from './web/main/footer/footer.component';
     GeneralcategoryComponent,
     ImageLogoComponent,
     FooterComponent,
+    TabviewComponent,
   ],
   imports: [
     BrowserModule,

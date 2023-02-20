@@ -23,7 +23,7 @@ export class Goodteams {
                         new FarmUnit('Sun Fac', 7,12),
                       
                     ],
-                    [],
+                    [],null,false,false
                 ),
                 new Farm(
                     'Ki-Adi-Mundi',
@@ -43,7 +43,7 @@ export class Goodteams {
                         new FarmUnit('Wrecker', 7),
                       
                     ],
-                    [],
+                    [],null,false,false
                 ),
 
             ]
