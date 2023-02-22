@@ -17,6 +17,15 @@ export class categories {
     farmMedium = new Farmguild().renewMedium();
     farmLow = new Farmguild().renewLow();
 
+    farmTWSquads = new Farmguild().renewTWSquads();
+    farmTBSquads = new Farmguild().renewTBSquads();
+
+    farmGLSquads= new Farmguild().renewGLSquads();
+    farmGLShips= new Farmguild().renewGLShips();
+    farmKeySquads= new Farmguild().renewKeySquads();
+    farmCapitalShips= new Farmguild().renewCapitalShips();
+    farmKeyFleets= new Farmguild().renewKeyFleets();
+
 
     renew() {
         this.legends = new Gls().renew();
@@ -28,6 +37,13 @@ export class categories {
         this.farmHigh = new Farmguild().renewHigh();
         this.farmMedium = new Farmguild().renewMedium();
         this.farmLow = new Farmguild().renewLow();
+        this.farmTWSquads = new Farmguild().renewTWSquads();
+        this.farmTBSquads = new Farmguild().renewTBSquads();
+        this.farmGLSquads= new Farmguild().renewGLSquads();
+        this.farmGLShips= new Farmguild().renewGLShips();
+        this.farmKeySquads= new Farmguild().renewKeySquads();
+        this.farmCapitalShips= new Farmguild().renewCapitalShips();
+        this.farmKeyFleets= new Farmguild().renewKeyFleets();
     
     }
 }

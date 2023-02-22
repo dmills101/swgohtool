@@ -13,6 +13,7 @@ import { GeneralcategoryComponent } from './web/components/generalcategory/gener
 import { ImageLogoComponent } from './web/components/image-logo/image-logo.component';
 import { FooterComponent } from './web/main/footer/footer.component';
 import { TabviewComponent } from './web/components/tabview/tabview.component';
+import { AccordeonComponent } from './web/components/accordeon/accordeon.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { TabviewComponent } from './web/components/tabview/tabview.component';
     ImageLogoComponent,
     FooterComponent,
     TabviewComponent,
+    AccordeonComponent,
   ],
   imports: [
     BrowserModule,

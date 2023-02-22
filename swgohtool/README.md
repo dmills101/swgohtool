@@ -17,6 +17,8 @@ cpit
 https://imgur.com/a/iGZObX5
 
 //Release notes
+v1.6
+    Updated farming list
 v1.5
     Hide completed
     Added tabs

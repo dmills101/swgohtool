@@ -179,6 +179,48 @@ export class FetchmeService {
   changefrmLow(newData:any){
     this._frmLow.next(newData);
   }
+
+  private _farmTWSquads = new BehaviorSubject<any>([]);
+  farmTWSquads = this._farmTWSquads.asObservable();
+  changefarmTWSquads(newData:any){
+    this._farmTWSquads.next(newData);
+  }
+
+  private _farmTBSquads = new BehaviorSubject<any>([]);
+  farmTBSquads = this._farmTBSquads.asObservable();
+  changefarmTBSquads(newData:any){
+    this._farmTBSquads.next(newData);
+  }
+
+  private _farmGLSquads = new BehaviorSubject<any>([]);
+  farmGLSquads = this._farmGLSquads.asObservable();
+  change_farmGLSquads(newData:any){
+    this._farmGLSquads.next(newData);
+  }
+  private _farmGLShips = new BehaviorSubject<any>([]);
+  farmGLShips = this._farmGLShips.asObservable();
+  change_farmGLShips(newData:any){
+    this._farmGLShips.next(newData);
+  }
+  private _farmKeySquads = new BehaviorSubject<any>([]);
+  farmKeySquads = this._farmKeySquads.asObservable();
+  change_farmKeySquads(newData:any){
+    this._farmKeySquads.next(newData);
+  }
+
+  private _farmCapitalShips = new BehaviorSubject<any>([]);
+  farmCapitalShips = this._farmCapitalShips.asObservable();
+  change_farmCapitalShips(newData:any){
+    this._farmCapitalShips.next(newData);
+  }
+  private _farmKeyFleets = new BehaviorSubject<any>([]);
+  farmKeyFleets = this._farmKeyFleets.asObservable();
+  change_farmKeyFleets(newData:any){
+    this._farmKeyFleets.next(newData);
+  }
+   
+
+
   constructor(private http: HttpClient) { 
 
     this.changeLoaded(false);
@@ -400,7 +442,38 @@ members.
       this.Loop(cats.farmHigh, player);
       this.loopFarmText(cats.farmHigh, player);
       this.changefrmHigh(cats.farmHigh.farms);
-       
+   
+      this.Loop(cats.farmTWSquads, player);
+      this.loopFarmText(cats.farmTWSquads, player);
+      this.changefarmTWSquads(cats.farmTWSquads.farms);
+
+      this.Loop(cats.farmTBSquads, player);
+      this.loopFarmText(cats.farmTBSquads, player);
+      this.changefarmTBSquads(cats.farmTBSquads.farms);
+
+      this.Loop(cats.farmGLSquads, player);
+      this.loopFarmText(cats.farmGLSquads, player);
+      this.change_farmGLSquads(cats.farmGLSquads.farms);
+
+      this.Loop(cats.farmGLShips, player);
+      this.loopFarmText(cats.farmGLShips, player);
+      this.change_farmGLShips(cats.farmGLShips.farms);
+
+      this.Loop(cats.farmKeySquads, player);
+      this.loopFarmText(cats.farmKeySquads, player);
+      this.change_farmKeySquads(cats.farmKeySquads.farms);
+
+  
+      this.Loop(cats.farmCapitalShips, player);
+      this.loopFarmText(cats.farmCapitalShips, player);
+      this.change_farmCapitalShips(cats.farmCapitalShips.farms);
+      
+      this.Loop(cats.farmKeyFleets, player);
+      this.loopFarmText(cats.farmKeyFleets, player);
+      this.change_farmKeyFleets(cats.farmKeyFleets.farms);
+
+
+   
       this.Loop(cats.farmMedium, player);
       this.changefrmMedium(cats.farmMedium.farms);
       this.Loop(cats.farmLow, player);

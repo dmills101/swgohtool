@@ -34,7 +34,17 @@ export class TabviewComponent {
   frmHigh$:Observable<any>= this.fetch.frmHigh;
   frmMedium$:Observable<any>= this.fetch.frmMedium;
   frmLow$:Observable<any>= this.fetch.frmLow;
+  farmTBSquads$:Observable<any>= this.fetch.farmTBSquads;
+  farmTWSquads$:Observable<any>= this.fetch.farmTWSquads;
 
+  farmGLSquads$:Observable<any>= this.fetch.farmGLSquads;
+  farmGLShips$:Observable<any>= this.fetch.farmGLShips;
+  farmKeySquads$:Observable<any>= this.fetch.farmKeySquads;
+  farmCapitalShips$:Observable<any>= this.fetch.farmCapitalShips;
+  farmKeyFleets$:Observable<any>= this.fetch.farmKeyFleets;
+
+
+ 
 
   tab1_active:boolean=false;
   tab2_active:boolean=false;
