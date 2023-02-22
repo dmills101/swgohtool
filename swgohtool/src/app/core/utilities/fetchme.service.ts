@@ -145,6 +145,82 @@ export class FetchmeService {
     this._cpitready_counterclose.next(newData);
   }
   
+  private _hidecompleted = new BehaviorSubject<any>([]);
+  hidecompleted = this._hidecompleted.asObservable();
+  hidecompletedValue = true;
+  changeHideCompleted(newData:any){
+    this.hidecompletedValue = newData;
+    this._hidecompleted.next(newData);
+  }
+  
+  private _hidecompletedItems = new BehaviorSubject<any>([]);
+  hidecompletedItems = this._hidecompletedItems.asObservable();
+  hidecompletedItemsValue = true;
+  changeHideCompletedItems(newData:any){
+    this.hidecompletedItemsValue = newData;
+    this._hidecompletedItems.next(newData);
+  }
+
+
+
+
+  private _frmHigh = new BehaviorSubject<any>([]);
+  frmHigh = this._frmHigh.asObservable();
+  changefrmHigh(newData:any){
+    this._frmHigh.next(newData);
+  }
+  private _frmMedium = new BehaviorSubject<any>([]);
+  frmMedium = this._frmMedium.asObservable();
+  changefrmMedium(newData:any){
+    this._frmMedium.next(newData);
+  }
+  private _frmLow = new BehaviorSubject<any>([]);
+  frmLow = this._frmLow.asObservable();
+  changefrmLow(newData:any){
+    this._frmLow.next(newData);
+  }
+
+  private _farmTWSquads = new BehaviorSubject<any>([]);
+  farmTWSquads = this._farmTWSquads.asObservable();
+  changefarmTWSquads(newData:any){
+    this._farmTWSquads.next(newData);
+  }
+
+  private _farmTBSquads = new BehaviorSubject<any>([]);
+  farmTBSquads = this._farmTBSquads.asObservable();
+  changefarmTBSquads(newData:any){
+    this._farmTBSquads.next(newData);
+  }
+
+  private _farmGLSquads = new BehaviorSubject<any>([]);
+  farmGLSquads = this._farmGLSquads.asObservable();
+  change_farmGLSquads(newData:any){
+    this._farmGLSquads.next(newData);
+  }
+  private _farmGLShips = new BehaviorSubject<any>([]);
+  farmGLShips = this._farmGLShips.asObservable();
+  change_farmGLShips(newData:any){
+    this._farmGLShips.next(newData);
+  }
+  private _farmKeySquads = new BehaviorSubject<any>([]);
+  farmKeySquads = this._farmKeySquads.asObservable();
+  change_farmKeySquads(newData:any){
+    this._farmKeySquads.next(newData);
+  }
+
+  private _farmCapitalShips = new BehaviorSubject<any>([]);
+  farmCapitalShips = this._farmCapitalShips.asObservable();
+  change_farmCapitalShips(newData:any){
+    this._farmCapitalShips.next(newData);
+  }
+  private _farmKeyFleets = new BehaviorSubject<any>([]);
+  farmKeyFleets = this._farmKeyFleets.asObservable();
+  change_farmKeyFleets(newData:any){
+    this._farmKeyFleets.next(newData);
+  }
+   
+
+
   constructor(private http: HttpClient) { 
 
     this.changeLoaded(false);
@@ -210,6 +286,73 @@ export class FetchmeService {
     return 0
   }
 
+  objectComparisonCallback_OK = (arrayItemA:any, arrayItemB:any) => {
+    if(arrayItemA.ok === arrayItemB.ok
+      && arrayItemA.ultimate === arrayItemB.ultimate
+      && arrayItemA.foundText === arrayItemB.foundText
+      ){
+      return 0;
+    }
+    if(
+      arrayItemA.ok
+      && arrayItemA.ultimate
+    ){
+      return -1;
+    }
+    if(
+      arrayItemA.ok
+      && !arrayItemA.ultimate
+    ){
+      if(arrayItemB.ok && arrayItemB.ultimate){
+        return 1;
+      }
+      return -1;
+    }
+    if(
+      !arrayItemA.ok
+      && arrayItemA.foundText
+      && arrayItemA.ultimate
+      ){
+        if(arrayItemB.ok && arrayItemB.ultimate  ){
+          return 1;
+        }
+      return -1;
+    }
+
+    return 1;
+    if(arrayItemA.ok === arrayItemB.ok){
+      return 0;
+    }
+    if(arrayItemA.ok){
+      return -1;
+    }
+    if(arrayItemA.foundText === arrayItemB.foundText){
+      return 0;
+    }
+    if(arrayItemA.foundText){
+      return -1;
+    }
+    if(arrayItemA.ultimate === arrayItemB.ultimate){
+      return 0;
+    }
+    if(arrayItemA.ultimate){
+      return -1;
+    }
+    return 1;
+
+    //foundText
+    return ((arrayItemA.ok || arrayItemA.has_ultimate) === (arrayItemB.ok || arrayItemB.has_ultimate) ) ?0:arrayItemA?-1:1;
+   /* if (arrayItemA.data.power < arrayItemB.data.power) {
+      return 1asdasd
+    }
+  
+    if (arrayItemA.data.power > arrayItemB.data.power) {
+      return -1
+    }
+  
+    return 0*/
+  }
+
    async populateGuild(){
     let data = await this.getDataForGuild();
     let jsonstr = JSON.stringify(data);
@@ -258,11 +401,15 @@ members.
       cats.player = player.data;
       this.Loop(cats.legends, player, true, gls_with_ultimate);
 
+       cats.legends.farms.sort(this.objectComparisonCallback_OK);
+
 
       this.Loop(cats.events, player);
+      cats.events.farms.sort(this.objectComparisonCallback_OK);
 
 
       this.Loop(cats.eventslow, player);
+      cats.eventslow.farms.sort(this.objectComparisonCallback_OK);
       this.Loop(cats.goodteams, player);
 
       this.Loop(cats.cpit, player);
@@ -292,8 +439,45 @@ members.
       this.changeEvents(cats.events.farms);
       this.changeLegends(cats.legends.farms);
       
-    
-       
+      this.Loop(cats.farmHigh, player);
+      this.loopFarmText(cats.farmHigh, player);
+      this.changefrmHigh(cats.farmHigh.farms);
+   
+      this.Loop(cats.farmTWSquads, player);
+      this.loopFarmText(cats.farmTWSquads, player);
+      this.changefarmTWSquads(cats.farmTWSquads.farms);
+
+      this.Loop(cats.farmTBSquads, player);
+      this.loopFarmText(cats.farmTBSquads, player);
+      this.changefarmTBSquads(cats.farmTBSquads.farms);
+
+      this.Loop(cats.farmGLSquads, player);
+      this.loopFarmText(cats.farmGLSquads, player);
+      this.change_farmGLSquads(cats.farmGLSquads.farms);
+
+      this.Loop(cats.farmGLShips, player);
+      this.loopFarmText(cats.farmGLShips, player);
+      this.change_farmGLShips(cats.farmGLShips.farms);
+
+      this.Loop(cats.farmKeySquads, player);
+      this.loopFarmText(cats.farmKeySquads, player);
+      this.change_farmKeySquads(cats.farmKeySquads.farms);
+
+  
+      this.Loop(cats.farmCapitalShips, player);
+      this.loopFarmText(cats.farmCapitalShips, player);
+      this.change_farmCapitalShips(cats.farmCapitalShips.farms);
+      
+      this.Loop(cats.farmKeyFleets, player);
+      this.loopFarmText(cats.farmKeyFleets, player);
+      this.change_farmKeyFleets(cats.farmKeyFleets.farms);
+
+
+   
+      this.Loop(cats.farmMedium, player);
+      this.changefrmMedium(cats.farmMedium.farms);
+      this.Loop(cats.farmLow, player);
+      this.changefrmLow(cats.farmLow.farms);
 
       this.changeLoaded(true);
       return cats;
@@ -302,6 +486,43 @@ members.
       console.error(e);
       this.changeError(e);
       return null;
+    }
+  }
+
+  private loopFarmText(eventslow: any, player: any){
+    for (let i = 0; i <= eventslow.farms.length - 1; i++) {
+      let frm:Farm = eventslow.farms[i];
+      let cnt = 0;
+      let total = 0;
+      for (let j = 0; j <= frm.units.length - 1; j++) {
+        let unt = frm.units[j];
+        total++;
+        if(unt.allOK()){
+          cnt++;
+        }
+      }
+      for (let j = 0; j <= frm.ships.length - 1; j++) {
+        let unt = frm.ships[j];
+        total++;
+        if(unt.allOK()){
+          cnt++;
+        }
+       }
+       frm.canhide=false;
+       frm.foundText = `${cnt} / ${total}`;
+       if(cnt == 0){
+        frm.ultimate=false;
+        frm.ok = false;
+       }
+       if(cnt == total){
+        frm.ultimate=true;
+        frm.ok = true;
+        frm.foundText = null;
+       }
+       if(cnt < total){
+        frm.ultimate=true;
+        frm.ok = false;
+       }
     }
   }
 
@@ -314,7 +535,11 @@ members.
       try {
         frm.image = this.unitsobj.find((x: { name: any; }) => x.name == frm.name).image;
       } catch (e) {
-        frm.image = this.shipsobj.find((x: { name: any; }) => x.name == frm.name).image;
+        try{
+          frm.image = this.shipsobj.find((x: { name: any; }) => x.name == frm.name).image;
+        }catch(e){
+
+        }
       }
 
       //Is ok?
@@ -416,6 +641,7 @@ members.
       );
       frm_cpit.ok = true;
       frm_cpit.ultimate=true;
+      frm_cpit.canhide=false;
       frm_cpit.units = [];
       for (let i = 0; i <= relicunits_cpitready_sorted.length - 1; i++) {
         let itm = relicunits_cpitready_sorted[i];
@@ -443,6 +669,7 @@ members.
           );
           frm_cpit.ok = true;
           frm_cpit.ultimate=true;
+          frm_cpit.canhide=false;
           frm_cpit.units.push(frm_unit);
         }
       }
@@ -475,6 +702,7 @@ members.
       );
       frm_cpit.ok = true;
       frm_cpit.ultimate=true;
+      frm_cpit.canhide=false;
       frm_cpit.units = [];
       for (let i = 0; i <= relicunits_cpitready_sorted.length - 1; i++) {
         let itm = relicunits_cpitready_sorted[i];
@@ -502,6 +730,7 @@ members.
           );
           frm_cpit.ok = true;
           frm_cpit.ultimate=true;
+          frm_cpit.canhide=false;
           frm_cpit.units.push(frm_unit);
         }
       }

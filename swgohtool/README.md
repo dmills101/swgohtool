@@ -17,6 +17,16 @@ cpit
 https://imgur.com/a/iGZObX5
 
 //Release notes
+v1.7
+    Add omicron support
+v1.6
+    Updated farming list
+v1.5
+    Hide completed
+    Added tabs
+    Completed first now
+    Added farm list
+    High priority farm list
 v1.4
     Bugfix: welcome image over small devices
     Added links to each toon. If the player has the toon then link to players toon. If not the link to general swgoh toon

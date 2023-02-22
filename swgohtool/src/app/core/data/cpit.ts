@@ -25,8 +25,8 @@ export class Cpit {
 
                     ],
                     [],
-                    'Phase(1) 22%'
-                ),
+                    'Phase(1) 22%',false,false
+                ) ,
                 new Farm(
                     'Jedi Master Kenobi',
                     'event',
@@ -41,7 +41,7 @@ export class Cpit {
 
                     ],
                     [],
-                    'Phase(1) 20%'
+                    'Phase(1) 20%',false,false
                 ),
                 new Farm(
                     'Supreme Leader Kylo Ren',
@@ -57,7 +57,7 @@ export class Cpit {
 
                     ],
                     [],
-                    'Phase(1) 17%'
+                    'Phase(1) 17%',false,false
                 ),
                 new Farm(
                     'Supreme Leader Kylo Ren',
@@ -73,7 +73,7 @@ export class Cpit {
 
                     ],
                     [],
-                    'Phase(2-3) 15%'
+                    'Phase(2-3) 15%',false,false
                 ),
                 new Farm(
                     'Supreme Leader Kylo Ren',
@@ -89,7 +89,7 @@ export class Cpit {
 
                     ],
                     [],
-                    'Phase(2-3) 10%'
+                    'Phase(2-3) 10%',false,false
                 ),
                 new Farm(
                     'Jedi Master Kenobi',
@@ -105,7 +105,7 @@ export class Cpit {
 
                     ],
                     [],
-                    'Phase(4) 12%'
+                    'Phase(4) 12%',false,false
                 ),
             ]
         )

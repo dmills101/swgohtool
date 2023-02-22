@@ -1,0 +1,112 @@
+<div>
+    <!--<div class="text-white">
+    {{tab1_active}}
+    {{tab2_active}}
+    {{tab3_active}}</div>-->
+    <!-- Nav pills -->
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link " [ngClass]="{'active':tab1_active}" data-bs-toggle="pill" href="#roster"
+                (click)="tab1()">
+                <h5>Roster Status</h5>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active':tab3_active}" data-bs-toggle="pill" href="#farm" (click)="tab3()">
+                <h5>Farming list</h5>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active':tab2_active}" data-bs-toggle="pill" href="#cpit" (click)="tab2()">
+                <h5>CPit</h5>
+            </a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane " id="roster" [ngClass]="{'active':tab1_active }">
+            <div class="accordion">
+                <app-accordeon [title] = "'Galactic legends (' + (gls$ | async).length + '/' + (legends$ | async).length + ')'"  >
+                    <app-generalcategory [list]="legends$"></app-generalcategory>
+                </app-accordeon>
+                <app-accordeon [title] = "'Events (' + (evnts$ | async).length + '/' + (events$ | async).length + ')'"  >
+                    <app-generalcategory [list]="events$"></app-generalcategory>
+                </app-accordeon>
+                <app-accordeon [title] = "'Events Low (' + (evntslw$ | async).length + '/'+(eventslow$ | async).length+')'"  >
+                    <app-generalcategory [list]="eventslow$"></app-generalcategory>
+                </app-accordeon>
+                <app-accordeon [title] = "'Good teams'"  >
+                    <app-generalcategory [list]="goodteams$"></app-generalcategory>
+                </app-accordeon>
+            </div>
+        </div>
+
+        <div class="tab-pane  " id="farm" [ngClass]="{'active':tab3_active }">
+            <div class="accordion">
+                <app-accordeon [title] = "'High priority'"  >
+                    <app-generalcategory [list]="frmHigh$"></app-generalcategory>
+                </app-accordeon>
+                <app-accordeon [title] = "'Medium priority'"  >
+                    <app-accordeon [title] = "'TB Squads'" [small]="true">
+                        <app-generalcategory [list]="farmTBSquads$"></app-generalcategory>
+                    </app-accordeon>
+                    <app-accordeon [title] = "'Territory war Squads'" [small]="true">
+                        <app-generalcategory [list]="farmTWSquads$"></app-generalcategory>
+                    </app-accordeon>
+                    <app-accordeon [title] = "'GL Squads'" [small]="true">
+                        <app-generalcategory [list]="farmGLSquads$"></app-generalcategory>
+                    </app-accordeon>
+                    <app-accordeon [title] = "'GL Ships fleets'" [small]="true">
+                        <app-generalcategory [list]="farmGLShips$"></app-generalcategory>
+                    </app-accordeon>
+                    <app-accordeon [title] = "'Key squads'" [small]="true">
+                        <app-generalcategory [list]="farmKeySquads$"></app-generalcategory>
+                    </app-accordeon>
+
+                    <!--<app-accordeon [title] = "'Capital ships'" [small]="true">
+                        <app-generalcategory [list]="farmCapitalShips$"></app-generalcategory>
+                    </app-accordeon>-->
+                    <app-accordeon [title] = "'Key fleets'" [small]="true">
+                        <app-generalcategory [list]="farmKeyFleets$"></app-generalcategory>
+                    </app-accordeon>
+
+
+                       
+                </app-accordeon>
+
+                 
+              
+                <!--<div class="accordion-item bg-dark">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingZ13">
+                        <button class="accordion-button bg-dark text-white " type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseZ13" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseZ13">
+                            <h4 class="text-warning  ">Low priority</h4>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseZ13" class="accordion-collapse collapse show"
+                        aria-labelledby="panelsStayOpen-headingZ13">
+                        <div class="accordion-body p-0">
+                            <app-generalcategory [list]="frmLow$"></app-generalcategory>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+
+        </div>
+        <div class="tab-pane  " id="cpit" [ngClass]="{'active':tab2_active }">
+            <div class="accordion">
+                <app-accordeon [title] = "'Cpit'"  >
+                    <app-generalcategory [list]="cpit$"></app-generalcategory>
+                </app-accordeon>
+                <app-accordeon [title] = "'Cpit ready (' + (cpitready_counter$ | async) + ')'"  >
+                    <app-generalcategory *ngIf="(cpitready_counter$ | async) > 0" [list]="cpitready$"></app-generalcategory>
+                </app-accordeon>
+                <app-accordeon [title] = "'Cpit ready Close (' + (cpitready_counterclose$ | async) + ')'"  >
+                    <app-generalcategory *ngIf="(cpitready_counterclose$ | async) > 0" [list]="cpitreadyclose$"></app-generalcategory>
+                </app-accordeon>
+            </div>
+        </div>
+    </div>
+</div>

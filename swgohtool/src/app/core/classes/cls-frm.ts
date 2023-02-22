@@ -1,5 +1,10 @@
 export class ClsFrm{
-  
+  //static hidecompleted:boolean = true;
+  //static hidecompletedItems:boolean = true;
+  static tab1_active:boolean=false;
+  static tab2_active:boolean=false;
+  static tab3_active:boolean=false;
+
 }
 
 export class Farm {
@@ -16,8 +21,9 @@ export class Farm {
   description: string;
   hasminimumpower: boolean = false;
   url:any=null;
+  canhide:boolean=true;
 
-  constructor(name: string, type: string, side: string, units: FarmUnit[], ships: FarmUnit[], desc: any = null, hasminimumpower: boolean = false) {
+  constructor(name: string, type: string, side: string, units: FarmUnit[], ships: FarmUnit[], desc: any = null, hasminimumpower: boolean = false,canhide:boolean=true) {
     this.name = name
     this.side = side
     this.units = units
@@ -26,12 +32,13 @@ export class Farm {
     this.foundText = null;
     this.description = desc;
     this.hasminimumpower = hasminimumpower;
+    this.canhide=canhide;
   }
 
   setFound(found: any) {
     this.found = found;
     if (found.data.rarity != 7) {
-      this.foundText = `${found.data.rarity}/7`;
+      this.foundText = `Stars:${found.data.rarity}/7`;
     } else {
       this.foundText = null;
     }
