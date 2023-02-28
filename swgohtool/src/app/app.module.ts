@@ -14,6 +14,7 @@ import { ImageLogoComponent } from './web/components/image-logo/image-logo.compo
 import { FooterComponent } from './web/main/footer/footer.component';
 import { TabviewComponent } from './web/components/tabview/tabview.component';
 import { AccordeonComponent } from './web/components/accordeon/accordeon.component';
+import { OmicronComponent } from './web/components/omicron/omicron.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { AccordeonComponent } from './web/components/accordeon/accordeon.compone
     FooterComponent,
     TabviewComponent,
     AccordeonComponent,
+    OmicronComponent,
   ],
   imports: [
     BrowserModule,

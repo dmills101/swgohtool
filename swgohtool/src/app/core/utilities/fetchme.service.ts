@@ -35,6 +35,15 @@ export class FetchmeService {
         this._units.next(newData);
   }
 
+
+  private _abilities = new BehaviorSubject<any>([]);
+  abilities = this._abilities.asObservable();
+  abilitiesobj:any;
+  changeAbilities(newData:any){
+    this.abilitiesobj = newData;
+    this._abilities.next(newData);
+  }
+
   private _playerdata = new BehaviorSubject<any>([]);
   playerdata = this._playerdata.asObservable();
   _playerobj:any;
@@ -381,6 +390,9 @@ members.
       if (!this.unitsobj) {
         await this.populateUnits();
       }
+      if (!this.abilitiesobj) {
+        await this.populateAbilities();
+      }
 
       let data = await this.getDataForPlayer(pid);
 
@@ -582,7 +594,7 @@ members.
         } catch (e) {
           itm_all = this.unitsobj.find((x: { name: any; }) => x.name == unt.name);
         }
-        unt.setPlayerItem(itm, itm_all);
+        unt.setPlayerItem(itm, itm_all,this.abilitiesobj);
       }
 
       //Check ships
@@ -595,7 +607,7 @@ members.
         } catch (e) {
           itm_all = this.shipsobj.find((x: { name: any; }) => x.name == unt.name);
         }
-        unt.setPlayerItem(itm, itm_all);
+        unt.setPlayerItem(itm, itm_all,this.abilitiesobj);
       }
     }
   }
@@ -608,6 +620,15 @@ members.
       .set('Access-Control-Allow-Origin', '*');
     return this.http.get(url__in, { headers: headers }).toPromise();
   }
+
+
+  //Populate abilities
+  async populateAbilities() {
+    let data = await this.getDataFor('abilities');
+    this.changeAbilities(data);
+    return data;
+  }
+
 
   //Populate ships
   async populateShips() {
@@ -652,7 +673,7 @@ members.
         } catch (e) {
           itm_all = this.unitsobj.find((x: { name: any; }) => x.name == frm_unit.name);
         }
-        frm_unit.setPlayerItem(itm, itm_all);
+        frm_unit.setPlayerItem(itm, itm_all,this.abilitiesobj);
 
         if(frm_cpit.units.length < 5){
           frm_cpit.units.push(frm_unit);
@@ -713,7 +734,7 @@ members.
         } catch (e) {
           itm_all = this.unitsobj.find((x: { name: any; }) => x.name == frm_unit.name);
         }
-        frm_unit.setPlayerItem(itm, itm_all);
+        frm_unit.setPlayerItem(itm, itm_all,this.abilitiesobj);
 
         if(frm_cpit.units.length < 5){
           frm_cpit.units.push(frm_unit);

@@ -218,9 +218,9 @@ export class Farmguild {
                     [
                         new FarmUnit('Jabba the Hutt', 7, 13, 8),
                         new FarmUnit('Krrsantan', 7,13,5),
-                        new FarmUnit('Skiff Guard (Lando Calrissian)', 7, 13, 5),
-                        new FarmUnit('Boushh (Leia Organa)', 7, 13, 5),
-                        new FarmUnit('Embo', 7,13,5),                        
+                        new FarmUnit('Skiff Guard (Lando Calrissian)', 7, 13, 5, undefined,undefined, ["uniqueskill_UNDERCOVERLANDO01"]),
+                        new FarmUnit('Boushh (Leia Organa)', 7, 13, 5, undefined, undefined, ["uniqueskill_BOUSHH02"]),
+                        new FarmUnit('Embo', 7, 13, 5, undefined,undefined, ["uniqueskill_EMBO01"]),
                     ],
                     [],null,false,false
                 ),
@@ -289,7 +289,7 @@ export class Farmguild {
                     [
                         new FarmUnit('Padmé Amidala', 7,13,8),
                         new FarmUnit('C-3PO', 7, 13, 7),
-                        new FarmUnit('Mace Windu', 7,13,5),
+                        new FarmUnit('Mace Windu', 7,13,5, undefined,undefined,["uniqueskill_MACEWINDU02"]),
                         new FarmUnit('Jedi Knight Anakin', 7, 13, 7),
                         new FarmUnit('Ahsoka Tano', 7, 13, 5),
                       
@@ -303,7 +303,7 @@ export class Farmguild {
                     [
                         new FarmUnit('General Grievous', 7,13,7),
                         new FarmUnit('B1 Battle Droid', 7, 13, 5),
-                        new FarmUnit('Droideka', 7,13,5),
+                        new FarmUnit('Droideka', 7,13,5, undefined,undefined,["uniqueskill_DROIDEKA01"]),
                         new FarmUnit('IG-100 MagnaGuard', 7, 13, 5),
                         new FarmUnit('B2 Super Battle Droid', 7, 13, 5),
                       
@@ -317,7 +317,7 @@ export class Farmguild {
                     [
                         new FarmUnit('Emperor Palpatine', 7, 13, 7),
                         new FarmUnit('Darth Vader', 7, 13, 7),
-                        new FarmUnit('Mara Jade, The Emperor\'s Hand', 7, 13, 5),
+                        new FarmUnit('Mara Jade, The Emperor\'s Hand', 7, 13, 5, undefined, undefined, ["uniqueskill_MARAJADE01"]),
                         new FarmUnit('Grand Admiral Thrawn', 7, 13, 6),
                         new FarmUnit('Royal Guard', 7, 13, 5),
                       
@@ -329,7 +329,7 @@ export class Farmguild {
                     'event',
                     'light',
                     [
-                        new FarmUnit('Captain Phasma', 7, 13, 5),
+                        new FarmUnit('Captain Phasma', 7, 13, 5, undefined,undefined, ["leaderskill_PHASMA"]),
                         new FarmUnit('Kylo Ren', 7, 13, 7),
                         new FarmUnit('First Order Officer', 7, 13, 5),
                         new FarmUnit('First Order Executioner', 7, 13, 5),
@@ -342,10 +342,10 @@ export class Farmguild {
                     'event',
                     'light',
                     [
-                        new FarmUnit('Boba Fett, Scion of Jango', 7, 13, 5),
+                        new FarmUnit('Boba Fett, Scion of Jango', 7, 13, 5, undefined, undefined, ["specialskill_BOBAFETTSCION01", "leaderskill_BOBAFETTSCION", "uniqueskill_BOBAFETTSCION01"]),
                         new FarmUnit('Bossk', 7, 13, 5),
                         new FarmUnit('Jango Fett', 7, 13, 7),
-                        new FarmUnit('Embo', 7, 13, 5),
+                        new FarmUnit('Embo', 7, 13, 5, undefined,undefined, ["uniqueskill_EMBO01"]),
                         new FarmUnit('Cad Bane', 7, 13, 5),
                         new FarmUnit('Boba Fett', 7, 13, 8),
                         new FarmUnit('IG-88', 7, 13, 5),
