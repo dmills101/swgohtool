@@ -150,6 +150,15 @@ TB: TERRITORY_TOURNAMENT_BATTLE
     this.player_itm = item;
     this.player_itm_orig = item_orig;
     try{
+    /*  if (this.name == "Rebel Officer Leia Organa") {
+        console.log('fafa');
+        console.log(abilities.filter((x: { character_base_id: any; is_omicron: boolean }) => x.character_base_id == this.player_itm_orig.base_id ));
+        console.log(abilities.filter((x: { character_base_id: any; is_omicron: boolean }) => x.is_omicron ));
+      }*/
+     /* if (this.name == "Second Sister") {
+        console.log('fafa');
+        console.log(abilities.filter((x: { character_base_id: any; is_omicron: boolean }) => x.character_base_id == this.player_itm_orig.base_id ));
+      }*/
     this.omicron_abilities = abilities.filter((x: { character_base_id: any; is_omicron: boolean }) => x.character_base_id == this.player_itm_orig.base_id && x.is_omicron);
     if (this.omicron_abilities.length > 0) {
       this.omicron_abilities.forEach((element: {
@@ -176,9 +185,7 @@ TB: TERRITORY_TOURNAMENT_BATTLE
         this.relic_level_on = 0;
       }
 
-      if (this.name == "Grand Inquisitor") {
-        //console.log('fafa');
-      }
+     
 
       this.rarityOK = (this.stars_on >= this.stars);
       if (this.gear_level) {

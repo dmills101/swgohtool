@@ -17,6 +17,8 @@ cpit
 https://imgur.com/a/iGZObX5
 
 //Release notes
+v1.8
+    Completed farm list
 v1.7
     Add omicron support
 v1.6

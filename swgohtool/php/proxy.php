@@ -72,6 +72,11 @@ fclose($fp);
 
 //$txt = "user id date";
 $date = date("Y-m-d G:i", time());
+//$bodytag = str_replace("%body%", "black", "<body text='%body%'>");
+
+//$pieces = explode("/", $origin);
+
+//$testdata = $date.":".end($pieces)."-".$url.PHP_EOL;
 $testdata = $date.":".$origin."-".$url.PHP_EOL;
 $myfile = file_put_contents('logs.txt', $testdata , FILE_APPEND | LOCK_EX);
 //$myfile = file_put_contents('logs.txt', $url.PHP_EOL , FILE_APPEND | LOCK_EX);

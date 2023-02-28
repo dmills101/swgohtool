@@ -26,7 +26,12 @@ export class categories {
     farmCapitalShips= new Farmguild().renewCapitalShips();
     farmKeyFleets= new Farmguild().renewKeyFleets();
 
+    lowOmis= new Farmguild().renewlowOmis();
+    lowKeySquads= new Farmguild().renewlowKeySquads();
+    lowKeyShips= new Farmguild().renewlowKeyShips();
+    lowKeyCharsCapitalShipsShips= new Farmguild().renewlowKeyCharsCapitalShipsShips();
 
+    
     renew() {
         this.legends = new Gls().renew();
         this.events = new EventsCls().renew();
@@ -44,7 +49,12 @@ export class categories {
         this.farmKeySquads= new Farmguild().renewKeySquads();
         this.farmCapitalShips= new Farmguild().renewCapitalShips();
         this.farmKeyFleets= new Farmguild().renewKeyFleets();
-    
+        this.lowOmis= new Farmguild().renewlowOmis();
+        this.lowKeySquads= new Farmguild().renewlowKeySquads();
+        this.lowKeyShips= new Farmguild().renewlowKeyShips();
+        this.lowKeyCharsCapitalShipsShips= new Farmguild().renewlowKeyCharsCapitalShipsShips();
+
+
     }
 }
 

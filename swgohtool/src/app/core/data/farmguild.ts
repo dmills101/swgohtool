@@ -13,6 +13,10 @@ export class Farmguild {
     public farmCapitalShips: FarmCategory | undefined;
     public farmKeyFleets: FarmCategory | undefined;
 
+    public lowOmis: FarmCategory | undefined;
+    public lowKeySquads: FarmCategory | undefined;
+    public lowKeyShips: FarmCategory | undefined;
+    public lowKeyCharsCapitalShipsShips: FarmCategory | undefined;
 
     public constructor() {
         this.renewHigh();
@@ -23,7 +27,178 @@ export class Farmguild {
         this.renewGLShips();
         this.renewKeySquads();
         this.renewCapitalShips();
+        this.renewlowOmis();
+        this.renewlowKeySquads();
+        this.renewlowKeyShips();
+        this.renewlowKeyCharsCapitalShipsShips();
     }
+
+    public renewlowOmis(): FarmCategory {
+        this.lowOmis = new FarmCategory(
+            'lowOmis', [
+                new Farm(
+                    'Territory war omicrons',
+                    'event',
+                    'light',
+                    [
+                        new FarmUnit("Ahsoka Tano (Fulcrum)", 7,13,5, undefined,undefined, ['uniqueskill_FULCRUMAHSOKA01']),
+                        new FarmUnit("Darth Sidious", 7,13,7, undefined,undefined, ['uniqueskill_DARTHSIDIOUS01']),
+                        new FarmUnit("Luke Skywalker (Farmboy)", 7,13,5, undefined,undefined, ['uniqueskill_LUKESKYWALKER01']),
+                        new FarmUnit("Juhani", 7,13,5, undefined,undefined, ['uniqueskill_juhani01']),
+                        new FarmUnit("T3-M4", 7,13,5, undefined,undefined, ['uniqueskill_t3_m4_02']),
+                        new FarmUnit("Chief Nebit", 7,13,5, undefined,undefined, ['leaderskill_CHIEFNEBIT']),
+                        new FarmUnit("Imperial Probe Droid", 7,13,5, undefined,undefined, ['uniqueskill_IMPERIALPROBEDROID01']),
+                        new FarmUnit("Hera Syndulla", 7,13,5, undefined,undefined, ['leaderskill_HERASYNDULLAS3']),
+      ],
+                    [
+                    ],null,false,false
+                ),
+                new Farm(
+                    'Territory battle omicrons',
+                    'event',
+                    'light',
+                    [
+                        new FarmUnit("Finn", 7,13,5, undefined,undefined, ['leaderskill_FINN']),
+                        new FarmUnit("Carth Onasi", 7,13,5, undefined,undefined, ['leaderskill_carthonasi']),
+                        new FarmUnit("Gamorrean Guard", 7,13,5, undefined,undefined, ['uniqueskill_GAMORREANGUARD01']),
+                    ],
+                    [
+                     ],null,false,false
+                ),
+            ]
+        );
+        return this.lowOmis;
+    }
+    public renewlowKeySquads(): FarmCategory {
+        this.lowKeySquads = new FarmCategory(
+            'lowKeySquads', [
+                new Farm(
+                    'Mon Mothma Rebels Base',
+                    'event',
+                    'light',
+                    [
+                        new FarmUnit("Mon Mothma", 7,13,5),
+                        new FarmUnit("Kyle Katarn", 7,13,5),
+                        new FarmUnit("Lando Calrissian", 7,13,5),
+                        new FarmUnit("Wedge Antilles", 7,13,5),
+                    ],
+                    [
+                    ],null,false,false
+                ),
+                new Farm(
+                    'Sana Starros Rebels Base',
+                    'event',
+                    'light',
+                    [
+                        new FarmUnit("Sana Starros", 7,13,5),
+                        new FarmUnit("Rebel Officer Leia Organa", 7,13,5, undefined, undefined, ['leaderskill_HOTHLEIA']),
+                    ],
+                    [
+                    ],null,false,false
+                ),
+                new Farm(
+                    'Traya Sith',
+                    'event',
+                    'light',
+                    [
+                        new FarmUnit("Darth Traya", 7,13,5),
+                        new FarmUnit("Darth Nihilus", 7,13,5),
+                        new FarmUnit("Darth Sion", 7,13,5),
+                        new FarmUnit("Darth Talon", 7,13,5),
+                        new FarmUnit("Savage Opress", 7,13,5),
+                    ],
+                    [
+                    ],null,false,false
+                ),
+                new Farm(
+                    'Maul Mandalorians Base',
+                    'event',
+                    'light',
+                    [
+                        new FarmUnit("Maul", 7,13,5),
+                        new FarmUnit("The Mandalorian (Beskar Armor)", 7,13,5),
+                        new FarmUnit("Bo-Katan Kryze", 7,13,5),
+                        new FarmUnit("The Armorer", 7,13,5),
+                    ],
+                    [
+                    ],null,false,false
+                ),
+                new Farm(
+                    'Doctor Aphra Base',
+                    'event',
+                    'light',
+                    [
+                        new FarmUnit("Doctor Aphra", 7,13,5),
+                        new FarmUnit("BT-1", 7,13,5),
+                        new FarmUnit("0-0-0", 7,13,5),
+                    ],
+                    [
+                    ],null,false,false
+                ),
+         
+             
+            ]
+        );
+        return this.lowKeySquads;
+    }
+    public renewlowKeyShips(): FarmCategory {
+        this.lowKeyShips = new FarmCategory(
+            'lowKeyShips', [
+                new Farm(
+                    'Chimaera Imperials',
+                    'event',
+                    'light',
+                    [
+                    ],
+                    [
+                        new FarmUnit('Chimaera', 7),
+                        new FarmUnit('TIE Advanced x1', 7),
+                        new FarmUnit("Emperor's Shuttle", 7),
+                        new FarmUnit('Imperial TIE Fighter', 7),
+    
+                    ],null,false,false
+                ),
+                 
+            ]
+        );
+        return this.lowKeyShips;
+    }
+    public renewlowKeyCharsCapitalShipsShips(): FarmCategory {
+        this.lowKeyCharsCapitalShipsShips = new FarmCategory(
+            'lowKeyCharsCapitalShipsShips', [
+                new Farm(
+                    'Key characters',
+                    'event',
+                    'light',
+                    [
+                        new FarmUnit("Iden Versio", 7,13,5),
+                        new FarmUnit("Dash Rendar", 7,13,7),
+                        new FarmUnit("Grand Master Yoda", 7,13,8),
+                        new FarmUnit("Darth Malgus", 7,13,5),
+                        new FarmUnit("Hondo Ohnaka", 7,13,5),
+                    ],
+                    [
+                    ],null,false,false
+                ),
+                new Farm(
+                    'Key Ships',
+                    'event',
+                    'light',
+                    [
+
+                    ],
+                    [
+                        new FarmUnit('Chimaera', 7),
+                        new FarmUnit('Scythe', 7),
+                        new FarmUnit('TIE Defender', 7),
+                        new FarmUnit('Ebon Hawk', 7),
+               ],null,false,false
+                ),
+            ]
+        );
+        return this.lowKeyCharsCapitalShipsShips;
+    }
+
 
     public renewKeyFleets(): FarmCategory {
         this.farmKeyFleets = new FarmCategory(
@@ -129,7 +304,98 @@ export class Farmguild {
                     ],
                     [],null,false,false
                 ),
-            ]
+                new Farm(
+                    'CLS',
+                    'event',
+                    'light',
+                    [
+                        new FarmUnit('Commander Luke Skywalker', 7, 13, 5),
+                        new FarmUnit('Han Solo', 7, 13, 8),
+                        new FarmUnit('Threepio & Chewie', 7, 13, 5),
+                        new FarmUnit('Chewbacca', 7, 13, 6),
+                        new FarmUnit('R2-D2', 7, 13, 7),
+                    ],
+                    [],null,false,false
+                ),
+                new Farm(
+                    'Imperial troopers',
+                    'event',
+                    'light',
+                    [
+                        new FarmUnit('General Veers', 7, 13, 5),
+                        new FarmUnit('Admiral Piett', 7, 13, 5),
+                        new FarmUnit('Colonel Starck', 7, 13, 5),
+                        new FarmUnit('Dark Trooper', 7, 13, 5),
+                        new FarmUnit('Moff Gideon', 7, 13, 5),
+                     ],
+                    [],null,false,false
+                ),
+                new Farm(
+                    'Inquisitors',
+                    'event',
+                    'light',
+                    [
+                        new FarmUnit('Grand Inquisitor', 7, 13, 5, undefined,undefined,["uniqueskill_GRANDINQUISITOR01"]),
+                        new FarmUnit('Fifth Brother', 7, 13, 5),
+                        new FarmUnit('Ninth Sister', 7, 13, 5),
+                        new FarmUnit('Seventh Sister', 7, 13, 5, undefined, undefined, ['leaderskill_SEVENTHSISTER']), //todo: fix
+                        new FarmUnit('Eighth Brother', 7, 13, 5, undefined, undefined, ['leaderskill_EIGHTHBROTHER']),
+                        new FarmUnit('Second Sister', 7, 13, 5, undefined, undefined, ['leaderskill_SECONDSISTER']),
+                     ],
+                    [],null,false,false
+                ),
+                new Farm(
+                    'Starkiller base',
+                    'event',
+                    'light',
+                    [
+                        new FarmUnit('Emperor Palpatine', 7, 13, 7),
+                        new FarmUnit('Mara Jade, The Emperor\'s Hand', 7, 13, 5, undefined, undefined, ["uniqueskill_MARAJADE01"]),
+                        new FarmUnit('Starkiller', 7, 13, 5),
+                        new FarmUnit('Obi-Wan Kenobi (Old Ben)', 7, 13, 5),
+                        new FarmUnit('Barriss Offee', 7, 13, 5),
+                     ],
+                    [],null,false,false
+                ),
+                new Farm(
+                    'Trench Seperatists',
+                    'event',
+                    'light',
+                    [
+                        new FarmUnit('Admiral Trench', 7, 13, 5, undefined, undefined, ['basicskill_TRENCH']),
+                        new FarmUnit('Count Dooku', 7, 13, 8),
+                        new FarmUnit('Jango Fett', 7, 13, 7),
+                        new FarmUnit('Wat Tambor', 7, 13, 7),
+                        new FarmUnit('Nute Gunray', 7, 13, 7),
+                     ],
+                    [],null,false,false
+                ),
+                new Farm(
+                    'Bad batch',
+                    'event',
+                    'light',
+                    [
+                        new FarmUnit('Hunter', 7, 13, 5),
+                        new FarmUnit('Tech', 7, 13, 5),
+                        new FarmUnit('Omega', 7, 13, 5),
+                        new FarmUnit('Wrecker', 7, 13, 5),
+                        new FarmUnit('Echo', 7, 13, 5),
+                     ],
+                    [],null,false,false
+                ),
+                new Farm(
+                    'Roque one base',
+                    'event',
+                    'light',
+                    [
+                        new FarmUnit('Admiral Raddus', 7, 13, 9),
+                        new FarmUnit('Cassian Andor', 7, 13, 8),
+                        new FarmUnit('Jyn Erso', 7, 13, 5),
+               
+                     ],
+                    [],null,false,false
+                ),
+          ]
         );
         return this.farmKeySquads;
     }
