@@ -39,12 +39,16 @@
           <tr *ngFor="let unt of lnd.units; index as i" >
             <ng-container *ngIf="checkCompletedItem(unt)">
             <th class="p-0" [ngClass]="{'bg-success': unt.allOK() && unt.hasTheToon(), 'bg-danger':!unt.hasTheToon()}"
-              scope="row"><img style="border:1px solid #00aaff" width="32" height="32" *ngIf="unt.image"
-                [src]="unt.image" alt="Image from swgoh.gg"></th>
+              scope="row">
+              <img style="border:1px solid #00aaff" width="32" height="32" *ngIf="unt.image" [src]="unt.image" alt="Image from swgoh.gg">
+              </th>
             <td class="py-0"
               [ngClass]="{'bg-success': unt.allOK() && unt.hasTheToon(), 'bg-danger':!unt.hasTheToon(), 'bd-yellow-200': unt.hasTheToon() && !unt.allOK()} ">
               <div class="my-1 " *ngIf="!unt.url">{{unt.name}}</div>
               <div class="my-1 " *ngIf="unt.url"><a  href="{{unt.url}}" class="" [ngClass]="{'link-secondary text-white-bd': (unt.allOK() && unt.hasTheToon()) || !unt.hasTheToon(), 'text-dark-bd':  unt.hasTheToon() && !unt.allOK()}" target="_blank">{{unt.name}}</a></div>
+              <div *ngIf="unt.omicron_abilities_obj.length > 0">
+                <app-omicron [omicron] = "unt.omicron_abilities_obj"></app-omicron>
+              </div>
             </td>
             <td class="py-0"
               [ngClass]="{'bg-success': unt.rarityOK || unt.allOK(), 'bg-danger':!unt.hasTheToon(), 'bd-yellow-200': unt.hasTheToon() && !unt.rarityOK}">

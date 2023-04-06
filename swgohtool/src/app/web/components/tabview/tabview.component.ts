@@ -44,7 +44,12 @@ export class TabviewComponent {
   farmKeyFleets$:Observable<any>= this.fetch.farmKeyFleets;
 
 
- 
+  lowOmis$:Observable<any>= this.fetch.lowOmis;
+  lowKeySquads$:Observable<any>= this.fetch.lowKeySquads;
+  lowKeyShips$:Observable<any>= this.fetch.lowKeyShips;
+  lowKeyCharsCapitalShipsShips$:Observable<any>= this.fetch.lowKeyCharsCapitalShipsShips;
+  
+
 
   tab1_active:boolean=false;
   tab2_active:boolean=false;

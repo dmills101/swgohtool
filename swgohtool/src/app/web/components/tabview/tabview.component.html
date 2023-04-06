@@ -74,8 +74,24 @@
 
                        
                 </app-accordeon>
+                <app-accordeon [title] = "'Low priority'"  >
+                    <app-accordeon [title] = "'Omicrons'" [small]="true">
+                        <app-generalcategory [list]="lowOmis$"></app-generalcategory>
+                    </app-accordeon>
+                    <app-accordeon [title] = "'Key Squads'" [small]="true">
+                        <app-generalcategory [list]="lowKeySquads$"></app-generalcategory>
+                    </app-accordeon>
+                    <app-accordeon [title] = "'Key Ships'" [small]="true">
+                        <app-generalcategory [list]="lowKeyShips$"></app-generalcategory>
+                    </app-accordeon>
+                    <app-accordeon [title] = "'Key Chars/Ships'" [small]="true">
+                        <app-generalcategory [list]="lowKeyCharsCapitalShipsShips$"></app-generalcategory>
+                    </app-accordeon>
+                </app-accordeon>
 
-                 
+ 
+                    
+                  
               
                 <!--<div class="accordion-item bg-dark">
                     <h2 class="accordion-header" id="panelsStayOpen-headingZ13">

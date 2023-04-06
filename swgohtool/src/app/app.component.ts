@@ -93,6 +93,7 @@ export class AppComponent {
     await this.fetch.populateGuild();
     await this.fetch.populateShips();
     await this.fetch.populateUnits();
+    await this.fetch.populateAbilities();
     this.loading = false;
   }
 

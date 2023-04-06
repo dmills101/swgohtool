@@ -73,6 +73,7 @@ export class FarmUnit {
   minimum_power_toon?: number = 0;
   minimum_power_ship?: number = 0;
   player_itm: any;
+  player_itm_orig: any;
 
   rarityOK: boolean = false;
   gearOK: boolean = false;
@@ -87,14 +88,22 @@ export class FarmUnit {
   image: any = null;
   url:any=null;
 
-  constructor(name: string, stars: number, gear_level?: number, relic_level?: number, minimum_power_toon?: number, minimum_power_ship?: number) {
+  omicron_abilities:any=[];
+  omicron_abilities_obj:any=[];
+  omicron_abilities_req:any=[];
+
+  constructor(name: string, stars: number, gear_level?: number, relic_level?: number, minimum_power_toon?: number, minimum_power_ship?: number, omicron_abilities_req?:any) {
     this.name = name;
     this.stars = stars;
     this.gear_level = gear_level;
     this.relic_level = relic_level;
     this.minimum_power_toon = minimum_power_toon;
     this.minimum_power_ship = minimum_power_ship;
-
+    if(omicron_abilities_req){
+      this.omicron_abilities_req = omicron_abilities_req;
+    }else{
+      this.omicron_abilities_req = [];
+    }
   }
 
   allOK() {
@@ -105,9 +114,31 @@ export class FarmUnit {
     return this.stars_on > 0;
   }
 
-  setPlayerItem(item: any, item_orig: any) {
+  setPlayerItem(item: any, item_orig: any, abilities:any) {
+/*
+"base_id":"uniqueskill_MACEWINDU02",
+"name":"Sense Weakness",
+"image":"https://game-assets.swgoh.gg/tex.abilityui_passive_senseweakness.png",
+"url":"//swgoh.gg/characters/mace-windu/#sense-weakness",
+"tier_max":9,
+"is_zeta":true,
+"is_omega":false,
+"is_omicron":true,
+"description":"Mace gains 30% Offense. At the start of Mace's turn, dispel Stealth on all enemies and a random enemy (excluding raid bosses and Galactic Legends) is inflicted with Speed Down for 1 turn and Shatterpoint, which can't be evaded or resisted. Shatterpoint is dispelled at the end of each ally's turn. When an ally damages an enemy with Shatterpoint, all allies recover 10% Protection, and all Galactic Republic Jedi allies gain Foresight for 1 turn.\n\nShatterpoint: Receiving damage dispels Shatterpoint and reduces Defense, Max Health, and Offense by 10% for the rest of the encounter; enemies can ignore Taunt to target this unit\n\n[E7E7E7]While in Territory Wars: At the start of each other Light Side ally's turn, a random enemy (excluding Galactic Legends) is inflicted with Speed Down for 1 turn and Shatterpoint, which can't be evaded or resisted. When an ally damages an enemy with Shatterpoint, all allies gain 5% Turn Meter.",
+"combat_type":1,
+"omicron_mode":8,
+"type":4,
+"character_base_id":"MACEWINDU",
+"ship_base_id":null,
+"omicron_battle_types":["TERRITORY_WAR_BATTLE"]},
+
+TW: TERRITORY_WAR_BATTLE
+TB: TERRITORY_TOURNAMENT_BATTLE
+*/
+
     if (item_orig && item_orig.hasOwnProperty('image') && item_orig.image) {
       this.image = item_orig.image;
+      
     }
     if(item && item.hasOwnProperty('data') && item.data && item.data.hasOwnProperty('url') && item.data.url){
       this.url = `https://swgoh.gg${item.data.url}`;
@@ -117,6 +148,34 @@ export class FarmUnit {
       this.url=null;
     }
     this.player_itm = item;
+    this.player_itm_orig = item_orig;
+    try{
+    /*  if (this.name == "Rebel Officer Leia Organa") {
+        console.log('fafa');
+        console.log(abilities.filter((x: { character_base_id: any; is_omicron: boolean }) => x.character_base_id == this.player_itm_orig.base_id ));
+        console.log(abilities.filter((x: { character_base_id: any; is_omicron: boolean }) => x.is_omicron ));
+      }*/
+     /* if (this.name == "Second Sister") {
+        console.log('fafa');
+        console.log(abilities.filter((x: { character_base_id: any; is_omicron: boolean }) => x.character_base_id == this.player_itm_orig.base_id ));
+      }*/
+    this.omicron_abilities = abilities.filter((x: { character_base_id: any; is_omicron: boolean }) => x.character_base_id == this.player_itm_orig.base_id && x.is_omicron);
+    if (this.omicron_abilities.length > 0) {
+      this.omicron_abilities.forEach((element: {
+        base_id: any; info: any; "": any;
+      }) => {
+        this.omicron_abilities_obj.push({
+          label: element.base_id, equiped: (!this.player_itm)?false:
+            this.player_itm.data.omicron_abilities.filter((x: any) => x == element.base_id).length > 0, info: element, required_farm: this.omicron_abilities_req.filter((x: any)=>x == element.base_id).length > 0
+        });
+
+      });
+
+    }
+  }catch(e){
+    console.error(e);
+  }
+
     if (item && item.hasOwnProperty('data') && item.data) {
       this.stars_on = item.data.rarity;
       this.power = item.data.power;
@@ -126,9 +185,7 @@ export class FarmUnit {
         this.relic_level_on = 0;
       }
 
-      if (this.name == "Grand Inquisitor") {
-        //console.log('fafa');
-      }
+     
 
       this.rarityOK = (this.stars_on >= this.stars);
       if (this.gear_level) {
@@ -141,6 +198,10 @@ export class FarmUnit {
       } else {
         this.relicOK = true;
       }
+      
+
+ 
+
     } else {
       this.gearOK = false;
       this.relicOK = false;
@@ -180,6 +241,8 @@ export class FarmUnit {
       this.minimumpowerok = true;
     }
  
+
+    
   }
 }
 

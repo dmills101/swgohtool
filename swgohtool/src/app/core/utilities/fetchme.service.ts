@@ -35,6 +35,15 @@ export class FetchmeService {
         this._units.next(newData);
   }
 
+
+  private _abilities = new BehaviorSubject<any>([]);
+  abilities = this._abilities.asObservable();
+  abilitiesobj:any;
+  changeAbilities(newData:any){
+    this.abilitiesobj = newData;
+    this._abilities.next(newData);
+  }
+
   private _playerdata = new BehaviorSubject<any>([]);
   playerdata = this._playerdata.asObservable();
   _playerobj:any;
@@ -219,8 +228,28 @@ export class FetchmeService {
     this._farmKeyFleets.next(newData);
   }
    
+  private _lowOmis = new BehaviorSubject<any>([]);
+  lowOmis = this._lowOmis.asObservable();
+  change_lowOmis(newData:any){
+    this._lowOmis.next(newData);
+  }
+  private _lowKeySquads = new BehaviorSubject<any>([]);
+  lowKeySquads = this._lowKeySquads.asObservable();
+  change_lowKeySquads(newData:any){
+    this._lowKeySquads.next(newData);
+  } 
 
-
+  private _lowKeyShips = new BehaviorSubject<any>([]);
+  lowKeyShips = this._lowKeyShips.asObservable();
+  change_lowKeyShips(newData:any){
+    this._lowKeyShips.next(newData);
+  } 
+  private _lowKeyCharsCapitalShipsShips = new BehaviorSubject<any>([]);
+  lowKeyCharsCapitalShipsShips = this._lowKeyCharsCapitalShipsShips.asObservable();
+  change_lowKeyCharsCapitalShipsShips(newData:any){
+    this._lowKeyCharsCapitalShipsShips.next(newData);
+  } 
+ 
   constructor(private http: HttpClient) { 
 
     this.changeLoaded(false);
@@ -381,6 +410,9 @@ members.
       if (!this.unitsobj) {
         await this.populateUnits();
       }
+      if (!this.abilitiesobj) {
+        await this.populateAbilities();
+      }
 
       let data = await this.getDataForPlayer(pid);
 
@@ -472,8 +504,22 @@ members.
       this.loopFarmText(cats.farmKeyFleets, player);
       this.change_farmKeyFleets(cats.farmKeyFleets.farms);
 
+      this.Loop(cats.lowKeyCharsCapitalShipsShips, player);
+      this.loopFarmText(cats.lowKeyCharsCapitalShipsShips, player);
+      this.change_lowKeyCharsCapitalShipsShips(cats.lowKeyCharsCapitalShipsShips.farms);
 
-   
+      this.Loop(cats.lowKeyShips, player);
+      this.loopFarmText(cats.lowKeyShips, player);
+      this.change_lowKeyShips(cats.lowKeyShips.farms);
+
+      this.Loop(cats.lowKeySquads, player);
+      this.loopFarmText(cats.lowKeySquads, player);
+      this.change_lowKeySquads(cats.lowKeySquads.farms);
+
+      this.Loop(cats.lowOmis, player);
+      this.loopFarmText(cats.lowOmis, player);
+      this.change_lowOmis(cats.lowOmis.farms);
+
       this.Loop(cats.farmMedium, player);
       this.changefrmMedium(cats.farmMedium.farms);
       this.Loop(cats.farmLow, player);
@@ -582,7 +628,7 @@ members.
         } catch (e) {
           itm_all = this.unitsobj.find((x: { name: any; }) => x.name == unt.name);
         }
-        unt.setPlayerItem(itm, itm_all);
+        unt.setPlayerItem(itm, itm_all,this.abilitiesobj);
       }
 
       //Check ships
@@ -595,7 +641,7 @@ members.
         } catch (e) {
           itm_all = this.shipsobj.find((x: { name: any; }) => x.name == unt.name);
         }
-        unt.setPlayerItem(itm, itm_all);
+        unt.setPlayerItem(itm, itm_all,this.abilitiesobj);
       }
     }
   }
@@ -608,6 +654,15 @@ members.
       .set('Access-Control-Allow-Origin', '*');
     return this.http.get(url__in, { headers: headers }).toPromise();
   }
+
+
+  //Populate abilities
+  async populateAbilities() {
+    let data = await this.getDataFor('abilities');
+    this.changeAbilities(data);
+    return data;
+  }
+
 
   //Populate ships
   async populateShips() {
@@ -652,7 +707,7 @@ members.
         } catch (e) {
           itm_all = this.unitsobj.find((x: { name: any; }) => x.name == frm_unit.name);
         }
-        frm_unit.setPlayerItem(itm, itm_all);
+        frm_unit.setPlayerItem(itm, itm_all,this.abilitiesobj);
 
         if(frm_cpit.units.length < 5){
           frm_cpit.units.push(frm_unit);
@@ -713,7 +768,7 @@ members.
         } catch (e) {
           itm_all = this.unitsobj.find((x: { name: any; }) => x.name == frm_unit.name);
         }
-        frm_unit.setPlayerItem(itm, itm_all);
+        frm_unit.setPlayerItem(itm, itm_all,this.abilitiesobj);
 
         if(frm_cpit.units.length < 5){
           frm_cpit.units.push(frm_unit);
