@@ -542,7 +542,7 @@ export class Farmguild {
                         new FarmUnit('Geonosian Brood Alpha', 7,13,5),
                         new FarmUnit('Geonosian Soldier', 7,13,5),
                         new FarmUnit('Geonosian Spy', 7,13,5),
-                        new FarmUnit('Poggle the Lesser', 7,13,5),
+                        new FarmUnit('Poggle the Lesser', 7,13,5, undefined, undefined, ["uniqueskill_POGGLETHELESSER01"]),
                         new FarmUnit('Sun Fac', 7,13,5),
                       
                     ],
