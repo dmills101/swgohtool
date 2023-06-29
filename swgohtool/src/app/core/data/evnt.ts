@@ -57,6 +57,19 @@ export class EventsCls {
                     new FarmUnit('Imperial TIE Bomber', 7),
                     new FarmUnit('Imperial TIE Fighter', 7),],
                 ),
+              new Farm(
+                    'Jedi Knight Cal Kestis',
+                    'event',
+                    'light',
+                    [
+                        new FarmUnit('Cal Kestis', 7, 12, undefined),
+                        new FarmUnit('Cere Junda', 7, 12, undefined),
+                        new FarmUnit('Merrin', 7, 12, undefined),
+                        new FarmUnit('Tarfful', 7, 12, undefined),
+                        new FarmUnit('Saw Gerrera', 7, 12, undefined),
+                    ],
+                    [],
+                ),
                 new Farm(
                     'Doctor Aphra',
                     'event',
